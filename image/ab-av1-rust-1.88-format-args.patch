@@ -1,0 +1,27 @@
+diff --git a/src/command/sample_encode.rs b/src/command/sample_encode.rs
+index bbe1c9e..f2632da 100644
+--- a/src/command/sample_encode.rs
++++ b/src/command/sample_encode.rs
+@@ -711,16 +711,16 @@ impl StdoutFormat {
+         match self {
+             Self::Human => {
+                 let vmaf_fmt = match *vmaf_score {
+-                    None => format_args!(""),
++                    None => String::new(),
+                     Some(s) => match s {
+-                        _ if s >= 95.0 => format_args!("VMAF {} ", style(s).bold().green()),
+-                        _ if s < 80.0 => format_args!("VMAF {} ", style(s).bold().red()),
+-                        _ => format_args!("VMAF {} ", style(s).bold()),
++                        _ if s >= 95.0 => format!("VMAF {} ", style(s).bold().green()),
++                        _ if s < 80.0 => format!("VMAF {} ", style(s).bold().red()),
++                        _ => format!("VMAF {} ", style(s).bold()),
+                     },
+                 };
+                 let xpsnr_fmt = match *xpsnr_score {
+-                    None => format_args!(""),
+-                    Some(s) => format_args!("XPSNR {} ", style(s).bold()),
++                    None => String::new(),
++                    Some(s) => format!("XPSNR {} ", style(s).bold()),
+                 };
+                 let percent = encode_percent.round();
+                 let size = match *predicted_encode_size {

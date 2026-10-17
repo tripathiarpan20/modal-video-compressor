@@ -1,0 +1,37 @@
+diff --git a/libvmaf/src/libvmaf.c b/libvmaf/src/libvmaf.c
+index 18ccff0e..5d23b98d 100644
+--- a/libvmaf/src/libvmaf.c
++++ b/libvmaf/src/libvmaf.c
+@@ -805,8 +805,8 @@ int vmaf_feature_score_pooled(VmafContext *vmaf, const char *feature_name,
+     if (index_low > index_high) return -EINVAL;
+     if (!pool_method) return -EINVAL;
+ 
+-    unsigned pic_cnt = 0;
+-    double min = 0., max = 0., sum = 0., i_sum = 0.;
++    unsigned pic_cnt = 0, harmonic_pic_cnt = 0;
++    double min = 0., max = 0., sum = 0., harmonic_i_sum = 0.;
+     for (unsigned i = index_low; i <= index_high; i++) {
+         if ((vmaf->cfg.n_subsample > 1) && (i % vmaf->cfg.n_subsample))
+             continue;
+@@ -815,7 +815,10 @@ int vmaf_feature_score_pooled(VmafContext *vmaf, const char *feature_name,
+         int err = vmaf_feature_score_at_index(vmaf, feature_name, &s, i);
+         if (err) return err;
+         sum += s;
+-        i_sum += 1. / (s + 1.);
++        if (s > 0.) {
++            harmonic_pic_cnt++;
++            harmonic_i_sum += 1. / s;
++        }
+         if ((i == index_low) || (s < min))
+             min = s;
+         if ((i == index_low) || (s > max))
+@@ -833,7 +836,8 @@ int vmaf_feature_score_pooled(VmafContext *vmaf, const char *feature_name,
+         *score = max;
+         break;
+     case VMAF_POOL_METHOD_HARMONIC_MEAN:
+-        *score = pic_cnt / i_sum - 1.0;
++        if (!harmonic_pic_cnt) return -EINVAL;
++        *score = harmonic_pic_cnt / harmonic_i_sum;
+         break;
+     default:
+         return -EINVAL;

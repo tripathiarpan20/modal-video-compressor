@@ -1,0 +1,148 @@
+diff --git a/src/command/args/vmaf.rs b/src/command/args/vmaf.rs
+index b93442a..33b7f45 100644
+--- a/src/command/args/vmaf.rs
++++ b/src/command/args/vmaf.rs
+@@ -46,6 +46,13 @@ pub struct Vmaf {
+     /// Setting to 0 disables use.
+     #[arg(long, default_value_t = DEFAULT_VMAF_FPS)]
+     pub vmaf_fps: f32,
++
++    /// Use ffmpeg's libvmaf_cuda filter for VMAF analysis.
++    ///
++    /// This keeps existing reference filters on CPU, then uploads frames to CUDA for
++    /// VMAF scoring.
++    #[arg(long, default_value_t = false, env = "AB_AV1_VMAF_CUDA")]
++    pub vmaf_cuda: bool,
+ }
+ 
+ impl Default for Vmaf {
+@@ -55,6 +62,7 @@ impl Default for Vmaf {
+             vmaf_args: <_>::default(),
+             vmaf_scale: <_>::default(),
+             vmaf_fps: DEFAULT_VMAF_FPS,
++            vmaf_cuda: false,
+         }
+     }
+ }
+@@ -65,6 +73,7 @@ impl std::hash::Hash for Vmaf {
+         self.vmaf_args.hash(state);
+         self.vmaf_scale.hash(state);
+         self.vmaf_fps.to_ne_bytes().hash(state);
++        self.vmaf_cuda.hash(state);
+     }
+ }
+ 
+@@ -77,13 +86,7 @@ impl Vmaf {
+         Some(self.vmaf_fps).filter(|r| *r > 0.0)
+     }
+ 
+-    /// Returns ffmpeg `filter_complex`/`lavfi` value for calculating vmaf.
+-    pub fn ffmpeg_lavfi(
+-        &self,
+-        distorted_res: Option<(u32, u32)>,
+-        pix_fmt: Option<PixelFormat>,
+-        ref_vfilter: Option<&str>,
+-    ) -> String {
++    fn lavfi_args(&self) -> Vec<Arc<str>> {
+         let mut args = self.vmaf_args.clone();
+         if !args.iter().any(|a| a.contains("n_threads")) {
+             // default n_threads to all cores
+@@ -95,6 +98,22 @@ impl Vmaf {
+                 .into(),
+             );
+         }
++        args
++    }
++
++    /// Returns ffmpeg `filter_complex`/`lavfi` value for calculating vmaf.
++    pub fn ffmpeg_lavfi(
++        &self,
++        distorted_res: Option<(u32, u32)>,
++        pix_fmt: Option<PixelFormat>,
++        ref_vfilter: Option<&str>,
++    ) -> String {
++        let mut args = self.lavfi_args();
++        if self.vmaf_cuda {
++            args.retain(|a| !a.starts_with("n_threads="));
++            args.insert(0, "n_threads=0".into());
++            return self.ffmpeg_lavfi_cuda(distorted_res, pix_fmt, ref_vfilter, &args);
++        }
+         let mut lavfi = args.join(":");
+         lavfi.insert_str(0, "libvmaf=shortest=true:ts_sync_mode=nearest:");
+ 
+@@ -134,6 +153,49 @@ impl Vmaf {
+         lavfi
+     }
+ 
++    fn ffmpeg_lavfi_cuda(
++        &self,
++        distorted_res: Option<(u32, u32)>,
++        pix_fmt: Option<PixelFormat>,
++        ref_vfilter: Option<&str>,
++        args: &[Arc<str>],
++    ) -> String {
++        let mut lavfi = args.join(":");
++        lavfi.insert_str(0, "libvmaf_cuda=shortest=true:ts_sync_mode=nearest:");
++
++        let mut model = VmafModel::from_args(args);
++        if let (None, Some((w, h))) = (model, distorted_res)
++            && w > 2560
++            && h > 1440
++        {
++            // for >2k resolutions use 4k model
++            lavfi.push_str(":model=version=vmaf_4k_v0.6.1");
++            model = Some(VmafModel::Vmaf4K);
++        }
++
++        let ref_vf: Cow<_> = match ref_vfilter {
++            None => "".into(),
++            Some(vf) if vf.ends_with(',') => vf.into(),
++            Some(vf) => format!("{vf},").into(),
++        };
++        let cuda_format = pix_fmt.unwrap_or(PixelFormat::Yuv420p);
++        let cuda_scale = self
++            .vf_scale(model.unwrap_or_default(), distorted_res)
++            .map(|(w, h)| format!("scale_cuda={w}:{h}:format={cuda_format}"))
++            .unwrap_or_else(|| format!("scale_cuda=format={cuda_format}"));
++
++        // Keep any user/reference filters on CPU, then upload to CUDA for libvmaf_cuda.
++        // This preserves existing VMAF semantics for filters like crop/scale/setsar.
++        let prefix = format!(
++            "[0:v]setpts=PTS-STARTPTS,settb=AVTB,hwupload_cuda,{cuda_scale}[dis];\
++             [1:v]{ref_vf}setpts=PTS-STARTPTS,settb=AVTB,hwupload_cuda,{cuda_scale}[ref];\
++             [dis][ref]"
++        );
++
++        lavfi.insert_str(0, &prefix);
++        lavfi
++    }
++
+     fn vf_scale(&self, model: VmafModel, distorted_res: Option<(u32, u32)>) -> Option<(i32, i32)> {
+         match (self.vmaf_scale, distorted_res) {
+             (VmafScale::Auto, Some((w, h))) => match model {
+@@ -259,6 +321,25 @@ fn vmaf_lavfi_default() {
+     assert_eq!(vmaf.ffmpeg_lavfi(None, None, None), expected);
+ }
+ 
++#[test]
++fn vmaf_lavfi_cuda() {
++    let vmaf = Vmaf {
++        vmaf_args: vec!["n_threads=5".into()],
++        vmaf_cuda: true,
++        ..<_>::default()
++    };
++    assert_eq!(
++        vmaf.ffmpeg_lavfi(
++            Some((1920, 1080)),
++            Some(PixelFormat::Yuv420p),
++            Some("scale=1280:-1,fps=24")
++        ),
++        "[0:v]setpts=PTS-STARTPTS,settb=AVTB,hwupload_cuda,scale_cuda=format=yuv420p[dis];\
++         [1:v]scale=1280:-1,fps=24,setpts=PTS-STARTPTS,settb=AVTB,hwupload_cuda,scale_cuda=format=yuv420p[ref];\
++         [dis][ref]libvmaf_cuda=shortest=true:ts_sync_mode=nearest:n_threads=0"
++    );
++}
++
+ #[test]
+ fn vmaf_lavfi_default_pix_fmt() {
+     let vmaf = Vmaf::default();

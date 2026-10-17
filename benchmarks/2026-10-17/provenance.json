@@ -1,0 +1,20 @@
+{
+  "benchmark_date": "2026-10-17",
+  "recorded_revision": "0e2d968aebdeac469416df51a4a2fcc193e3e576",
+  "source_url": "https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00021068/00021068.mp4",
+  "input_sha256": "ea51543b2c5a36391ea6b4dd6347655f3f9ecd8820ed3bc047092a7823ff1d6d",
+  "evidence_format": "Project identifiers and paths normalized; numeric measurements and algorithm settings preserved.",
+  "archived_file_sha256": {
+    "report.json": "f757c91d0198b03c77c45decf606ebec951965c5563d61fa1c9434aa25146e28",
+    "run-vmaf89-sampled.log": "a5457697edfa9db7c1661110205ecd6b80768ae107b4057826dd4825fe8f40bd",
+    "input-probe.json": "e4c3cf743850d4400a51d415de007e011be3f7f7f8ec5ae32025756e3e0c75a4",
+    "source/benchmark_modal_neg.py": "bf3602b45375d2cce5ec18b03fd00a89597f6af40567bd1cae1cab28c4182259",
+    "baseline-full-search/report.json": "0a2a4a57c3d781474e16e370eddbb9d49a81b63785bd8378c5770fe08c4e024f",
+    "baseline-full-search/run-vmaf89-fixed.log": "7c70c10a041df773ddb6d181231de073cb3f4039b411caf1a47a3a6c7487f017",
+    "baseline-full-search/benchmark_modal_neg.py": "ea7779c99e0a5e8ab57057bcd38bb8f9e9a469cc15306c247401232ce86c6d41"
+  },
+  "notes": [
+    "The recorded revision identifies the historical benchmark code state, not a commit in this standalone repository.",
+    "The current CLI adds run isolation and reporting; no fresh GPU run of the current wrapper is implied."
+  ]
+}

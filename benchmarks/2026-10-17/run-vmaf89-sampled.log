@@ -1,0 +1,1140 @@
+✓ Initialized. View run at https://modal.com/apps/tripathiarpan20/main/ap-awoN60K9876JrJS1CAC8Ro
+Building image im-DGJDyVekLhivamE8wdJKiG
+
+=> Step 0: FROM base
+
+=> Step 1: ENV COMPRESSION_VOLUME=modal-video-compressor-bench-20261017-095824
+
+=> Step 2: ENV NVIDIA_DRIVER_CAPABILITIES=graphics,video,compute,utility
+
+=> Step 3: ENV AB_AV1_BIN=/app/ab-av1
+
+=> Step 4: ENV AB_AV1_EXECUTION_MODE=local
+
+=> Step 5: ENV FFMPEG_BIN=ffmpeg
+
+=> Step 6: ENV FFPROBE_BIN=ffprobe
+
+=> Step 7: ENV SHARED_VOLUME_PATH=/bench
+
+=> Step 8: ENV DISABLE_REMOTE_IO=true
+
+=> Step 9: ENV COMPRESSION_STORAGE_STARTUP_CHECK_ENABLED=false
+
+=> Step 10: ENV COMPRESSION_CLEANUP_ENABLED=false
+
+=> Step 11: ENV MAX_CONCURRENT_COMPRESSION=1
+
+=> Step 12: ENV COMPRESSION_CHUNKING_ENABLED=true
+
+=> Step 13: ENV COMPRESSION_CHUNK_TARGET_SECONDS=600
+
+=> Step 14: ENV COMPRESSION_CHUNK_PARALLELISM=4
+
+=> Step 15: ENV AB_AV1_VMAF_MODEL=version=vmaf_v0.6.1neg
+
+=> Step 16: ENV AB_AV1_VMAF_POOL=harmonic_mean
+
+=> Step 17: ENV AB_AV1_VMAF_CUDA=true
+
+=> Step 18: ENV AB_AV1_VMAF_N_SUBSAMPLE=1
+
+=> Step 19: ENV AB_AV1_VMAF_FPS=0
+
+=> Step 20: ENV AB_AV1_VMAF_SCALE=none
+
+=> Step 21: ENV AB_AV1_NVENC_FULL_SEARCH=false
+
+=> Step 22: ENV AB_AV1_NVENC_THOROUGH=false
+
+=> Step 23: ENV AB_AV1_NVENC_CRF_INCREMENT=1
+
+=> Step 24: ENV AB_AV1_SAMPLE_EVERY=2m
+
+=> Step 25: ENV AB_AV1_NVENC_VERIFY_TIMEOUT_SECONDS=3600
+
+=> Step 26: ENV AB_AV1_VMAF_FALLBACK_ENABLED=false
+Saving image...
+Image saved, took 623.57ms
+
+Built image im-DGJDyVekLhivamE8wdJKiG in 2.04s
+
+
+✓ Created objects.
+├── ✓ Uploaded /workspace/modal-video-compressor/benchmark_modal_neg.py
+├── ✓ Uploaded /workspace/modal-video-compressor/compression/app.py
+├── ✓ Uploaded /workspace/modal-video-compressor/image
+└── ✓ Created Function benchmark.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 13.0.0
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+2026-10-17 10:42:37 | INFO    | [loc-neg-benchmark] Queued compression (codec=av1_nvenc, codec_mode=CRF, target_bitrate=not set, target_vmaf=89.00, strategy=direct-cq, fallback_floor=89.00, position=0, waiting=1, remote=False)
+2026-10-17 10:42:37 | INFO    | [loc-neg-benchmark] Input metadata: duration=54m 39.4s, size=1.9 GB, resolution=1920x1080, fps=24.00, codec=h264, bitrate=5.08 Mbps
+2026-10-17 10:42:37 | INFO    | [loc-neg-benchmark] Starting compression (active=1/1, queued=0, queue_wait=0.0s, duration=54m 39.4s, chunked=True)
+2026-10-17 10:42:37 | INFO    | [loc-neg-benchmark] Using keyframe chunked ab-av1 compression (target_chunk_seconds=600, parallelism=4)
+2026-10-17 10:42:37 | INFO    | [loc-neg-benchmark] split segments: ffmpeg -hide_banner -y -i /bench/input.mp4 -map 0:v:0 -map 0:a? -c copy -sn -dn -f segment -segment_time 600 -reset_timestamps 1 -segment_format mp4 /bench/loc-neg-benchmark_chunks/input/input_%05d.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00000.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00001.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00002.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00003.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00004.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00005.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark] chunk_seams {"seam_seconds": [603.271, 1202.396, 1809.146, 2400.396, 3002.021], "seam_timestamps": ["00:10:03.271", "00:20:02.396", "00:30:09.146", "00:40:00.396", "00:50:02.021"], "segment_durations_seconds": [603.271, 599.125, 606.75, 591.25, 601.625, 277.417]}
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark] Compressing 6 keyframe chunks with ab-av1 (target=600s, parallelism=4)
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00001] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00000.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00002] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00001.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00003] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00002.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00004] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00003.mp4
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00001] Compression attempt 1/2 (target_vmaf=89.00, crf_range=targeted, sample_every=2m)
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00001] Command: /app/ab-av1 auto-encode -i /bench/loc-neg-benchmark_chunks/input/input_00000.mp4 -o /bench/loc-neg-benchmark_chunks/encoded/encoded_00000.mp4 -e av1_nvenc --preset p4 --min-vmaf 89 --vmaf model=version=vmaf_v0.6.1neg --vmaf pool=harmonic_mean --vmaf n_subsample=1 --vmaf n_threads=0 --vmaf-fps 0 --vmaf-scale none --vmaf-cuda --min-crf 22 --max-crf 51 --crf-increment 1 --enc rc=vbr --enc b:v=0 --enc tune=uhq --enc multipass=fullres --enc rc-lookahead=24 --enc lookahead_level=3 --enc g=900 --enc tile-columns=1 --enc tile-rows=1 --enc qp_cb_offset=2 --enc qp_cr_offset=2 --enc bf=5 --enc b_ref_mode=middle --enc temporal-aq=1 --sample-every 2m --enc-input hwaccel=cuda --vfilter setsar=1
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00002] Compression attempt 1/2 (target_vmaf=89.00, crf_range=targeted, sample_every=2m)
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00002] Command: /app/ab-av1 auto-encode -i /bench/loc-neg-benchmark_chunks/input/input_00001.mp4 -o /bench/loc-neg-benchmark_chunks/encoded/encoded_00001.mp4 -e av1_nvenc --preset p4 --min-vmaf 89 --vmaf model=version=vmaf_v0.6.1neg --vmaf pool=harmonic_mean --vmaf n_subsample=1 --vmaf n_threads=0 --vmaf-fps 0 --vmaf-scale none --vmaf-cuda --min-crf 22 --max-crf 51 --crf-increment 1 --enc rc=vbr --enc b:v=0 --enc tune=uhq --enc multipass=fullres --enc rc-lookahead=24 --enc lookahead_level=3 --enc g=900 --enc tile-columns=1 --enc tile-rows=1 --enc qp_cb_offset=2 --enc qp_cr_offset=2 --enc bf=5 --enc b_ref_mode=middle --enc temporal-aq=1 --sample-every 2m --enc-input hwaccel=cuda --vfilter setsar=1
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00003] Compression attempt 1/2 (target_vmaf=89.00, crf_range=targeted, sample_every=2m)
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00003] Command: /app/ab-av1 auto-encode -i /bench/loc-neg-benchmark_chunks/input/input_00002.mp4 -o /bench/loc-neg-benchmark_chunks/encoded/encoded_00002.mp4 -e av1_nvenc --preset p4 --min-vmaf 89 --vmaf model=version=vmaf_v0.6.1neg --vmaf pool=harmonic_mean --vmaf n_subsample=1 --vmaf n_threads=0 --vmaf-fps 0 --vmaf-scale none --vmaf-cuda --min-crf 22 --max-crf 51 --crf-increment 1 --enc rc=vbr --enc b:v=0 --enc tune=uhq --enc multipass=fullres --enc rc-lookahead=24 --enc lookahead_level=3 --enc g=900 --enc tile-columns=1 --enc tile-rows=1 --enc qp_cb_offset=2 --enc qp_cr_offset=2 --enc bf=5 --enc b_ref_mode=middle --enc temporal-aq=1 --sample-every 2m --enc-input hwaccel=cuda --vfilter setsar=1
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00004] Compression attempt 1/2 (target_vmaf=89.00, crf_range=targeted, sample_every=2m)
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00004] Command: /app/ab-av1 auto-encode -i /bench/loc-neg-benchmark_chunks/input/input_00003.mp4 -o /bench/loc-neg-benchmark_chunks/encoded/encoded_00003.mp4 -e av1_nvenc --preset p4 --min-vmaf 89 --vmaf model=version=vmaf_v0.6.1neg --vmaf pool=harmonic_mean --vmaf n_subsample=1 --vmaf n_threads=0 --vmaf-fps 0 --vmaf-scale none --vmaf-cuda --min-crf 22 --max-crf 51 --crf-increment 1 --enc rc=vbr --enc b:v=0 --enc tune=uhq --enc multipass=fullres --enc rc-lookahead=24 --enc lookahead_level=3 --enc g=900 --enc tile-columns=1 --enc tile-rows=1 --enc qp_cb_offset=2 --enc qp_cr_offset=2 --enc bf=5 --enc b_ref_mode=middle --enc temporal-aq=1 --sample-every 2m --enc-input hwaccel=cuda --vfilter setsar=1
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:42:45Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 36
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:42:45Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 36
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:42:45Z INFO  ab_av1::command::sample_encode] encoding sample 1/5 crf 36
+2026-10-17 10:42:45 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:42:45Z INFO  ab_av1::command::sample_encode] encoding sample 1/5 crf 36
+2026-10-17 10:42:50 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=120.58x
+2026-10-17 10:42:50 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=119.65x
+2026-10-17 10:42:50 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=121.22x
+2026-10-17 10:42:50 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=118.16x
+2026-10-17 10:42:54 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:42:54Z INFO  ab_av1::vmaf] vmaf input_00000.sample69+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00000.sample69+480f.mkv
+2026-10-17 10:42:54 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:42:54Z INFO  ab_av1::vmaf] vmaf input_00002.sample69+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00002.sample69+480f.mkv
+2026-10-17 10:42:54 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:42:54Z INFO  ab_av1::vmaf] vmaf input_00003.sample81+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00003.sample81+480f.mkv
+2026-10-17 10:42:55 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=60.30x
+2026-10-17 10:42:55 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=59.86x
+2026-10-17 10:42:55 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=60.63x
+2026-10-17 10:42:55 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=59.09x
+2026-10-17 10:42:56 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:42:56Z INFO  ab_av1::vmaf] vmaf input_00001.sample83+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00001.sample83+480f.mkv
+2026-10-17 10:43:00 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=40.20x
+2026-10-17 10:43:00 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=39.91x
+2026-10-17 10:43:00 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=40.43x
+2026-10-17 10:43:00 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=39.40x
+2026-10-17 10:43:05 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=30.15x
+2026-10-17 10:43:05 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=29.94x
+2026-10-17 10:43:05 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=30.32x
+2026-10-17 10:43:05 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=29.55x
+2026-10-17 10:43:07 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:07Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 3626.01508 VMAF 89.75 (%)
+2026-10-17 10:43:07 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:07Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 36
+2026-10-17 10:43:08 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:43:08Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 3615.389781 VMAF 91.85 (%)
+2026-10-17 10:43:08 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:43:08Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 36
+2026-10-17 10:43:09 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:43:09Z INFO  ab_av1::command::sample_encode] sample 1/5 crf 3621.40087 VMAF 91.03 (%)
+2026-10-17 10:43:09 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:43:09Z INFO  ab_av1::command::sample_encode] encoding sample 2/5 crf 36
+2026-10-17 10:43:09 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:09Z INFO  ab_av1::command::sample_encode] sample 1/5 crf 3621.953335 VMAF 92.14 (%)
+2026-10-17 10:43:09 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:09Z INFO  ab_av1::command::sample_encode] encoding sample 2/5 crf 36
+2026-10-17 10:43:10 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=24.12x
+2026-10-17 10:43:10 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=23.95x
+2026-10-17 10:43:10 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=24.26x
+2026-10-17 10:43:10 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=23.64x
+2026-10-17 10:43:15 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=20.10x
+2026-10-17 10:43:15 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=19.96x
+2026-10-17 10:43:15 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=20.22x
+2026-10-17 10:43:15 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=19.70x
+2026-10-17 10:43:17 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:17Z INFO  ab_av1::vmaf] vmaf input_00000.sample158+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00000.sample158+480f.mkv
+2026-10-17 10:43:18 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:18Z INFO  ab_av1::vmaf] vmaf input_00001.sample186+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00001.sample186+480f.mkv
+2026-10-17 10:43:19 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:43:19Z INFO  ab_av1::vmaf] vmaf input_00003.sample183+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00003.sample183+480f.mkv
+2026-10-17 10:43:19 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:43:19Z INFO  ab_av1::vmaf] vmaf input_00002.sample159+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00002.sample159+480f.mkv
+2026-10-17 10:43:20 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=17.23x
+2026-10-17 10:43:20 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=17.11x
+2026-10-17 10:43:20 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=17.33x
+2026-10-17 10:43:20 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=16.89x
+2026-10-17 10:43:23 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:23Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 3612.936374 VMAF 92.20 (%)
+2026-10-17 10:43:23 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:23Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 36
+2026-10-17 10:43:25 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=15.08x
+2026-10-17 10:43:25 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=14.97x
+2026-10-17 10:43:25 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=15.16x
+2026-10-17 10:43:25 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=14.78x
+2026-10-17 10:43:27 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:27Z INFO  ab_av1::command::sample_encode] sample 2/5 crf 3620.204905 VMAF 91.67 (%)
+2026-10-17 10:43:27 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:27Z INFO  ab_av1::command::sample_encode] encoding sample 3/5 crf 36
+2026-10-17 10:43:28 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:43:28Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 3614.750297 VMAF 91.10 (%)
+2026-10-17 10:43:28 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:43:28Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 36
+2026-10-17 10:43:28 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:43:28Z INFO  ab_av1::command::sample_encode] sample 2/5 crf 3614.506933 VMAF 90.46 (%)
+2026-10-17 10:43:28 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:43:28Z INFO  ab_av1::command::sample_encode] encoding sample 3/5 crf 36
+2026-10-17 10:43:30 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=13.40x
+2026-10-17 10:43:30 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=13.31x
+2026-10-17 10:43:30 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=13.48x
+2026-10-17 10:43:30 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=13.13x
+2026-10-17 10:43:32 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:32Z INFO  ab_av1::vmaf] vmaf input_00000.sample247+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00000.sample247+480f.mkv
+2026-10-17 10:43:35 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=12.06x
+2026-10-17 10:43:35 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=11.98x
+2026-10-17 10:43:35 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=12.13x
+2026-10-17 10:43:35 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=11.82x
+2026-10-17 10:43:36 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:36Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 3616.462446 VMAF 91.00 (%)
+2026-10-17 10:43:36 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:36Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 36
+2026-10-17 10:43:38 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:38Z INFO  ab_av1::vmaf] vmaf input_00001.sample289+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00001.sample289+480f.mkv
+2026-10-17 10:43:40 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=10.96x
+2026-10-17 10:43:40 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=10.89x
+2026-10-17 10:43:40 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=11.03x
+2026-10-17 10:43:40 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=10.75x
+2026-10-17 10:43:42 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:43:42Z INFO  ab_av1::vmaf] vmaf input_00002.sample248+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00002.sample248+480f.mkv
+2026-10-17 10:43:42 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:43:42Z INFO  ab_av1::vmaf] vmaf input_00003.sample285+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00003.sample285+480f.mkv
+2026-10-17 10:43:45 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:45Z INFO  ab_av1::command::sample_encode] sample 3/5 crf 3616.96571 VMAF 92.06 (%)
+2026-10-17 10:43:45 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:45Z INFO  ab_av1::command::sample_encode] encoding sample 4/5 crf 36
+2026-10-17 10:43:45 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=10.05x
+2026-10-17 10:43:45 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=9.98x
+2026-10-17 10:43:45 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=10.11x
+2026-10-17 10:43:45 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=9.85x
+2026-10-17 10:43:47 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:47Z INFO  ab_av1::vmaf] vmaf input_00000.sample336+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00000.sample336+480f.mkv
+2026-10-17 10:43:48 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:43:48Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 3611.857729 VMAF 92.45 (%)
+2026-10-17 10:43:48 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:43:48Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 36
+2026-10-17 10:43:49 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:43:49Z INFO  ab_av1::command::sample_encode] sample 3/5 crf 3614.904458 VMAF 91.28 (%)
+2026-10-17 10:43:49 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:43:49Z INFO  ab_av1::command::sample_encode] encoding sample 4/5 crf 36
+2026-10-17 10:43:50 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=9.28x
+2026-10-17 10:43:50 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=9.21x
+2026-10-17 10:43:50 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=9.33x
+2026-10-17 10:43:50 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=9.09x
+2026-10-17 10:43:51 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:51Z INFO  ab_av1::vmaf] vmaf input_00001.sample392+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00001.sample392+480f.mkv
+2026-10-17 10:43:52 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:52Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 3617.20997 VMAF 92.20 (%)
+2026-10-17 10:43:52 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:43:52Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 36
+2026-10-17 10:43:55 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=8.62x
+2026-10-17 10:43:55 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=8.56x
+2026-10-17 10:43:55 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=8.66x
+2026-10-17 10:43:55 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=8.44x
+2026-10-17 10:43:56 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:56Z INFO  ab_av1::command::sample_encode] sample 4/5 crf 3616.42506 VMAF 91.89 (%)
+2026-10-17 10:43:56 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:43:56Z INFO  ab_av1::command::sample_encode] encoding sample 5/5 crf 36
+2026-10-17 10:43:56 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:43:56Z INFO  ab_av1::vmaf] vmaf input_00002.sample338+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00002.sample338+480f.mkv
+2026-10-17 10:43:57 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:43:57Z INFO  ab_av1::vmaf] vmaf input_00003.sample387+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00003.sample387+480f.mkv
+2026-10-17 10:44:00 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=8.04x
+2026-10-17 10:44:00 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.99x
+2026-10-17 10:44:00 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=8.09x
+2026-10-17 10:44:00 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.88x
+2026-10-17 10:44:01 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:01Z INFO  ab_av1::vmaf] vmaf input_00000.sample425+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00000.sample425+480f.mkv
+2026-10-17 10:44:02 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:02Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 3615.174419 VMAF 92.03 (%)
+2026-10-17 10:44:02 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:02Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 36
+2026-10-17 10:44:03 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:03Z INFO  ab_av1::command::sample_encode] sample 4/5 crf 3615.790295 VMAF 91.49 (%)
+2026-10-17 10:44:03 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:03Z INFO  ab_av1::command::sample_encode] encoding sample 5/5 crf 36
+2026-10-17 10:44:05 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.54x
+2026-10-17 10:44:05 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.49x
+2026-10-17 10:44:05 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.58x
+2026-10-17 10:44:05 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.39x
+2026-10-17 10:44:05 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:05Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 3615.116387 VMAF 90.71 (%)
+2026-10-17 10:44:05 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:05Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 36
+2026-10-17 10:44:06 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:06Z INFO  ab_av1::vmaf] vmaf input_00001.sample495+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00001.sample495+480f.mkv
+2026-10-17 10:44:10 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.10x
+2026-10-17 10:44:10 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.05x
+2026-10-17 10:44:10 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.14x
+2026-10-17 10:44:10 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.95x
+2026-10-17 10:44:10 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:10Z INFO  ab_av1::command::sample_encode] sample 5/5 crf 3614.101621 VMAF 92.19 (%)
+2026-10-17 10:44:10 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:10Z INFO  ab_av1::command::sample_encode] crf 36 VMAF 91.99 predicted video stream size 65.76 MiB (18%) taking 5 minutes
+2026-10-17 10:44:10 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:10Z INFO  ab_av1::command::sample_encode] encoding sample 1/5 crf 45
+2026-10-17 10:44:11 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:11Z INFO  ab_av1::vmaf] vmaf input_00002.sample427+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00002.sample427+480f.mkv
+2026-10-17 10:44:13 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:13Z INFO  ab_av1::vmaf] vmaf input_00003.sample489+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00003.sample489+480f.mkv
+2026-10-17 10:44:14 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:14Z INFO  ab_av1::vmaf] vmaf input_00000.sample514+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00000.sample514+480f.mkv
+2026-10-17 10:44:15 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:15Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 3615.31394 VMAF 91.64 (%)
+2026-10-17 10:44:15 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:15Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 36
+2026-10-17 10:44:15 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.70x
+2026-10-17 10:44:15 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.65x
+2026-10-17 10:44:15 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.74x
+2026-10-17 10:44:15 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.57x
+2026-10-17 10:44:18 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:18Z INFO  ab_av1::command::sample_encode] sample 5/5 crf 3614.728178 VMAF 91.60 (%)
+2026-10-17 10:44:18 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:18Z INFO  ab_av1::command::sample_encode] crf 36 VMAF 91.17 predicted video stream size 57.66 MiB (16%) taking 5 minutes
+2026-10-17 10:44:18 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:18Z INFO  ab_av1::command::sample_encode] encoding sample 1/5 crf 45
+2026-10-17 10:44:19 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:19Z INFO  ab_av1::vmaf] vmaf input_00001.sample83+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00001.sample83+480f.mkv
+2026-10-17 10:44:20 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:20Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 3618.219095 VMAF 90.22 (%)
+2026-10-17 10:44:20 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:20Z INFO  ab_av1::command::sample_encode] crf 36 VMAF 91.01 predicted video stream size 66.73 MiB (18%) taking 5 minutes
+2026-10-17 10:44:20 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:20Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 45
+2026-10-17 10:44:20 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.35x
+2026-10-17 10:44:20 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.30x
+2026-10-17 10:44:20 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.38x
+2026-10-17 10:44:20 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.22x
+2026-10-17 10:44:23 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:23Z INFO  ab_av1::vmaf] vmaf input_00002.sample517+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00002.sample517+480f.mkv
+2026-10-17 10:44:24 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:24Z INFO  ab_av1::command::sample_encode] sample 1/5 crf 459.824644 VMAF 88.29 (%)
+2026-10-17 10:44:24 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:24Z INFO  ab_av1::command::sample_encode] encoding sample 2/5 crf 45
+2026-10-17 10:44:25 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.03x
+2026-10-17 10:44:25 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.99x
+2026-10-17 10:44:25 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.07x
+2026-10-17 10:44:25 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.91x
+2026-10-17 10:44:27 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:27Z INFO  ab_av1::vmaf] vmaf input_00003.sample81+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00003.sample81+480f.mkv
+2026-10-17 10:44:28 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:28Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 3616.019789 VMAF 91.15 (%)
+2026-10-17 10:44:28 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:28Z INFO  ab_av1::command::sample_encode] crf 36 VMAF 91.70 predicted video stream size 51.88 MiB (15%) taking 5 minutes
+2026-10-17 10:44:28 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:28Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 45
+2026-10-17 10:44:29 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:29Z INFO  ab_av1::vmaf] vmaf input_00000.sample69+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00000.sample69+480f.mkv
+2026-10-17 10:44:30 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.74x
+2026-10-17 10:44:30 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.70x
+2026-10-17 10:44:30 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.78x
+2026-10-17 10:44:30 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.63x
+2026-10-17 10:44:33 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:33Z INFO  ab_av1::command::sample_encode] sample 1/5 crf 459.648457 VMAF 86.41 (%)
+2026-10-17 10:44:33 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:33Z INFO  ab_av1::command::sample_encode] encoding sample 2/5 crf 45
+2026-10-17 10:44:34 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:34Z INFO  ab_av1::vmaf] vmaf input_00001.sample186+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00001.sample186+480f.mkv
+2026-10-17 10:44:35 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:35Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 4511.886203 VMAF 81.46 (%)
+2026-10-17 10:44:35 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:35Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 45
+2026-10-17 10:44:35 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.48x
+2026-10-17 10:44:35 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.44x
+2026-10-17 10:44:35 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.51x
+2026-10-17 10:44:35 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.37x
+2026-10-17 10:44:38 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:38Z INFO  ab_av1::vmaf] vmaf input_00002.sample69+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00002.sample69+480f.mkv
+2026-10-17 10:44:40 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:40Z INFO  ab_av1::command::sample_encode] sample 2/5 crf 458.889212 VMAF 87.01 (%)
+2026-10-17 10:44:40 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:40Z INFO  ab_av1::command::sample_encode] encoding sample 3/5 crf 45
+2026-10-17 10:44:40 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=1m 55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.24x
+2026-10-17 10:44:40 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=1m 55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.21x
+2026-10-17 10:44:40 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=1m 55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.27x
+2026-10-17 10:44:40 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=1m 55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.14x
+2026-10-17 10:44:42 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:42Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 456.496585 VMAF 88.80 (%)
+2026-10-17 10:44:42 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:42Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 45
+2026-10-17 10:44:43 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:43Z INFO  ab_av1::vmaf] vmaf input_00003.sample183+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00003.sample183+480f.mkv
+2026-10-17 10:44:44 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:44Z INFO  ab_av1::vmaf] vmaf input_00000.sample158+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00000.sample158+480f.mkv
+2026-10-17 10:44:45 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.03x
+2026-10-17 10:44:45 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.99x
+2026-10-17 10:44:45 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.05x
+2026-10-17 10:44:45 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.93x
+2026-10-17 10:44:47 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:47Z INFO  ab_av1::vmaf] vmaf input_00001.sample289+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00001.sample289+480f.mkv
+2026-10-17 10:44:48 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:48Z INFO  ab_av1::command::sample_encode] sample 2/5 crf 455.639234 VMAF 86.66 (%)
+2026-10-17 10:44:48 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:48Z INFO  ab_av1::command::sample_encode] encoding sample 3/5 crf 45
+2026-10-17 10:44:49 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:49Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 455.3835 VMAF 89.15 (%)
+2026-10-17 10:44:49 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:49Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 45
+2026-10-17 10:44:50 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.82x
+2026-10-17 10:44:50 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.79x
+2026-10-17 10:44:50 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.85x
+2026-10-17 10:44:50 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.73x
+2026-10-17 10:44:52 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:52Z INFO  ab_av1::vmaf] vmaf input_00002.sample159+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00002.sample159+480f.mkv
+2026-10-17 10:44:53 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:53Z INFO  ab_av1::command::sample_encode] sample 3/5 crf 457.604242 VMAF 88.24 (%)
+2026-10-17 10:44:53 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:44:53Z INFO  ab_av1::command::sample_encode] encoding sample 4/5 crf 45
+2026-10-17 10:44:55 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.64x
+2026-10-17 10:44:55 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.61x
+2026-10-17 10:44:55 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.67x
+2026-10-17 10:44:55 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.55x
+2026-10-17 10:44:56 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:56Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 455.7178707 VMAF 87.64 (%)
+2026-10-17 10:44:56 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:44:56Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 45
+2026-10-17 10:44:57 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:44:57Z INFO  ab_av1::vmaf] vmaf input_00003.sample285+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00003.sample285+480f.mkv
+2026-10-17 10:44:57 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:44:57Z INFO  ab_av1::vmaf] vmaf input_00000.sample247+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00000.sample247+480f.mkv
+2026-10-17 10:45:00 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.47x
+2026-10-17 10:45:00 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.44x
+2026-10-17 10:45:00 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.49x
+2026-10-17 10:45:00 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.38x
+2026-10-17 10:45:01 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:01Z INFO  ab_av1::vmaf] vmaf input_00001.sample392+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00001.sample392+480f.mkv
+2026-10-17 10:45:03 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:03Z INFO  ab_av1::command::sample_encode] sample 3/5 crf 455.8576775 VMAF 88.30 (%)
+2026-10-17 10:45:03 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:03Z INFO  ab_av1::command::sample_encode] encoding sample 4/5 crf 45
+2026-10-17 10:45:04 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:04Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 456.682607 VMAF 87.05 (%)
+2026-10-17 10:45:04 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:04Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 45
+2026-10-17 10:45:05 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.31x
+2026-10-17 10:45:05 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.28x
+2026-10-17 10:45:05 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.33x
+2026-10-17 10:45:05 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.22x
+2026-10-17 10:45:08 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:08Z INFO  ab_av1::vmaf] vmaf input_00002.sample248+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00002.sample248+480f.mkv
+2026-10-17 10:45:08 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:08Z INFO  ab_av1::command::sample_encode] sample 4/5 crf 456.7226086 VMAF 88.33 (%)
+2026-10-17 10:45:08 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:08Z INFO  ab_av1::command::sample_encode] encoding sample 5/5 crf 45
+2026-10-17 10:45:10 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.16x
+2026-10-17 10:45:10 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.13x
+2026-10-17 10:45:10 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.18x
+2026-10-17 10:45:10 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.08x
+2026-10-17 10:45:12 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:12Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 455.0038137 VMAF 89.67 (%)
+2026-10-17 10:45:12 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:12Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 45
+2026-10-17 10:45:13 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:13Z INFO  ab_av1::vmaf] vmaf input_00003.sample387+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00003.sample387+480f.mkv
+2026-10-17 10:45:15 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:15Z INFO  ab_av1::vmaf] vmaf input_00000.sample336+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00000.sample336+480f.mkv
+2026-10-17 10:45:15 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.02x
+2026-10-17 10:45:15 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.99x
+2026-10-17 10:45:15 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.04x
+2026-10-17 10:45:15 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.94x
+2026-10-17 10:45:17 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:17Z INFO  ab_av1::vmaf] vmaf input_00001.sample495+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00001.sample495+480f.mkv
+2026-10-17 10:45:19 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:19Z INFO  ab_av1::command::sample_encode] sample 4/5 crf 456.421453 VMAF 88.28 (%)
+2026-10-17 10:45:19 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:19Z INFO  ab_av1::command::sample_encode] encoding sample 5/5 crf 45
+2026-10-17 10:45:20 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.89x
+2026-10-17 10:45:20 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 35.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.86x
+2026-10-17 10:45:20 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 35.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.91x
+2026-10-17 10:45:20 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.81x
+2026-10-17 10:45:20 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:20Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 457.8571663 VMAF 88.05 (%)
+2026-10-17 10:45:20 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:20Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 45
+2026-10-17 10:45:22 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:22Z INFO  ab_av1::vmaf] vmaf input_00002.sample338+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00002.sample338+480f.mkv
+2026-10-17 10:45:23 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:23Z INFO  ab_av1::command::sample_encode] sample 5/5 crf 456.1383853 VMAF 88.97 (%)
+2026-10-17 10:45:23 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:23Z INFO  ab_av1::command::sample_encode] crf 45 VMAF 88.17 predicted video stream size 28.80 MiB (8%) taking 4 minutes
+2026-10-17 10:45:23 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:23Z INFO  ab_av1::command::sample_encode] encoding sample 1/5 crf 43
+2026-10-17 10:45:25 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.77x
+2026-10-17 10:45:25 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 40.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.74x
+2026-10-17 10:45:25 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 40.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.79x
+2026-10-17 10:45:25 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.69x
+2026-10-17 10:45:26 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:26Z INFO  ab_av1::vmaf] vmaf input_00003.sample489+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00003.sample489+480f.mkv
+2026-10-17 10:45:27 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:27Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 456.382396 VMAF 89.08 (%)
+2026-10-17 10:45:27 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:27Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 45
+2026-10-17 10:45:29 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:29Z INFO  ab_av1::vmaf] vmaf input_00000.sample425+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00000.sample425+480f.mkv
+2026-10-17 10:45:30 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.66x
+2026-10-17 10:45:30 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 45.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.63x
+2026-10-17 10:45:30 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 45.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.68x
+2026-10-17 10:45:30 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 45.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.58x
+2026-10-17 10:45:31 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:31Z INFO  ab_av1::vmaf] vmaf input_00001.sample83+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00001.sample83+480f.mkv
+2026-10-17 10:45:32 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:32Z INFO  ab_av1::command::sample_encode] sample 5/5 crf 455.773815 VMAF 88.44 (%)
+2026-10-17 10:45:32 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:32Z INFO  ab_av1::command::sample_encode] crf 45 VMAF 87.62 predicted video stream size 23.70 MiB (7%) taking 4 minutes
+2026-10-17 10:45:32 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:32Z INFO  ab_av1::command::sample_encode] encoding sample 1/5 crf 42
+2026-10-17 10:45:34 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:34Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 456.0439305 VMAF 87.02 (%)
+2026-10-17 10:45:34 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:34Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 45
+2026-10-17 10:45:35 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.55x
+2026-10-17 10:45:35 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 50.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.52x
+2026-10-17 10:45:35 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 50.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.57x
+2026-10-17 10:45:35 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 50.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.48x
+2026-10-17 10:45:35 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:35Z INFO  ab_av1::vmaf] vmaf input_00002.sample427+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00002.sample427+480f.mkv
+2026-10-17 10:45:36 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:36Z INFO  ab_av1::command::sample_encode] sample 1/5 crf 4311.21292 VMAF 89.18 (%)
+2026-10-17 10:45:36 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:36Z INFO  ab_av1::command::sample_encode] encoding sample 2/5 crf 43
+2026-10-17 10:45:40 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:40Z INFO  ab_av1::vmaf] vmaf input_00003.sample81+480f.av1_nvenc.crf42.p4.mp4 vs reference input_00003.sample81+480f.mkv
+2026-10-17 10:45:40 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=2m 55.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.45x
+2026-10-17 10:45:40 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=2m 55.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.42x
+2026-10-17 10:45:40 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=2m 55.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.47x
+2026-10-17 10:45:40 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=2m 55.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.38x
+2026-10-17 10:45:40 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:40Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 456.0134087 VMAF 88.35 (%)
+2026-10-17 10:45:40 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:40Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 45
+2026-10-17 10:45:42 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:42Z INFO  ab_av1::vmaf] vmaf input_00000.sample514+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00000.sample514+480f.mkv
+2026-10-17 10:45:44 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:44Z INFO  ab_av1::command::sample_encode] sample 1/5 crf 4212.035352 VMAF 88.11 (%)
+2026-10-17 10:45:44 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:44Z INFO  ab_av1::command::sample_encode] encoding sample 2/5 crf 42
+2026-10-17 10:45:44 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:44Z INFO  ab_av1::vmaf] vmaf input_00001.sample186+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00001.sample186+480f.mkv
+2026-10-17 10:45:45 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 0.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.35x
+2026-10-17 10:45:45 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 0.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.33x
+2026-10-17 10:45:45 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 0.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.37x
+2026-10-17 10:45:45 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 0.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.28x
+2026-10-17 10:45:47 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:47Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 457.8867197 VMAF 84.99 (%)
+2026-10-17 10:45:47 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:47Z INFO  ab_av1::command::sample_encode] crf 45 VMAF 86.29 predicted video stream size 28.90 MiB (8%) taking 5 minutes
+2026-10-17 10:45:47 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:47Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 40
+2026-10-17 10:45:48 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:48Z INFO  ab_av1::vmaf] vmaf input_00002.sample517+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00002.sample517+480f.mkv
+2026-10-17 10:45:49 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:49Z INFO  ab_av1::command::sample_encode] sample 2/5 crf 4310.3657 VMAF 88.21 (%)
+2026-10-17 10:45:49 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:49Z INFO  ab_av1::command::sample_encode] encoding sample 3/5 crf 43
+2026-10-17 10:45:50 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 5.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.26x
+2026-10-17 10:45:50 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 5.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.24x
+2026-10-17 10:45:50 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 5.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.28x
+2026-10-17 10:45:50 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 5.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.19x
+2026-10-17 10:45:52 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:52Z INFO  ab_av1::vmaf] vmaf input_00003.sample183+480f.av1_nvenc.crf42.p4.mp4 vs reference input_00003.sample183+480f.mkv
+2026-10-17 10:45:53 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:53Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 456.902464 VMAF 87.50 (%)
+2026-10-17 10:45:53 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:53Z INFO  ab_av1::command::sample_encode] crf 45 VMAF 88.51 predicted video stream size 21.42 MiB (6%) taking 5 minutes
+2026-10-17 10:45:53 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:45:53Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 44
+2026-10-17 10:45:55 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:45:55Z INFO  ab_av1::vmaf] vmaf input_00000.sample69+480f.av1_nvenc.crf40.p4.mp4 vs reference input_00000.sample69+480f.mkv
+2026-10-17 10:45:55 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 10.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.17x
+2026-10-17 10:45:55 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 10.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.15x
+2026-10-17 10:45:55 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 10.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.19x
+2026-10-17 10:45:55 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 10.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.11x
+2026-10-17 10:45:57 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:45:57Z INFO  ab_av1::vmaf] vmaf input_00001.sample289+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00001.sample289+480f.mkv
+2026-10-17 10:45:57 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:57Z INFO  ab_av1::command::sample_encode] sample 2/5 crf 427.4977274 VMAF 88.37 (%)
+2026-10-17 10:45:57 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:45:57Z INFO  ab_av1::command::sample_encode] encoding sample 3/5 crf 42
+2026-10-17 10:46:00 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:00Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 4017.770462 VMAF 86.47 (%)
+2026-10-17 10:46:00 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:00Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 40
+2026-10-17 10:46:00 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 15.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.09x
+2026-10-17 10:46:00 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 15.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.07x
+2026-10-17 10:46:00 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 15.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.11x
+2026-10-17 10:46:00 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 15.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.03x
+2026-10-17 10:46:02 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:02Z INFO  ab_av1::vmaf] vmaf input_00002.sample69+480f.av1_nvenc.crf44.p4.mp4 vs reference input_00002.sample69+480f.mkv
+2026-10-17 10:46:03 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:03Z INFO  ab_av1::command::sample_encode] sample 3/5 crf 438.66057 VMAF 89.13 (%)
+2026-10-17 10:46:03 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:03Z INFO  ab_av1::command::sample_encode] encoding sample 4/5 crf 43
+2026-10-17 10:46:05 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 20.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.02x
+2026-10-17 10:46:05 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 20.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.99x
+2026-10-17 10:46:05 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 20.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.03x
+2026-10-17 10:46:05 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 20.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.96x
+2026-10-17 10:46:06 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:06Z INFO  ab_av1::vmaf] vmaf input_00003.sample285+480f.av1_nvenc.crf42.p4.mp4 vs reference input_00003.sample285+480f.mkv
+2026-10-17 10:46:07 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:07Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 446.9892325 VMAF 89.23 (%)
+2026-10-17 10:46:07 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:07Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 44
+2026-10-17 10:46:09 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:09Z INFO  ab_av1::vmaf] vmaf input_00000.sample158+480f.av1_nvenc.crf40.p4.mp4 vs reference input_00000.sample158+480f.mkv
+2026-10-17 10:46:10 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 25.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.94x
+2026-10-17 10:46:10 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 25.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.92x
+2026-10-17 10:46:10 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 25.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.96x
+2026-10-17 10:46:10 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 25.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.88x
+2026-10-17 10:46:11 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:11Z INFO  ab_av1::command::sample_encode] sample 3/5 crf 427.5392456 VMAF 89.45 (%)
+2026-10-17 10:46:11 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:11Z INFO  ab_av1::command::sample_encode] encoding sample 4/5 crf 42
+2026-10-17 10:46:11 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:11Z INFO  ab_av1::vmaf] vmaf input_00001.sample392+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00001.sample392+480f.mkv
+2026-10-17 10:46:13 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:13Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 408.275785 VMAF 91.08 (%)
+2026-10-17 10:46:13 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:13Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 40
+2026-10-17 10:46:15 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 30.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.87x
+2026-10-17 10:46:15 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 30.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.85x
+2026-10-17 10:46:15 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 30.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.89x
+2026-10-17 10:46:15 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 30.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.81x
+2026-10-17 10:46:16 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:16Z INFO  ab_av1::vmaf] vmaf input_00002.sample159+480f.av1_nvenc.crf44.p4.mp4 vs reference input_00002.sample159+480f.mkv
+2026-10-17 10:46:18 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:18Z INFO  ab_av1::command::sample_encode] sample 4/5 crf 437.890144 VMAF 89.41 (%)
+2026-10-17 10:46:18 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:18Z INFO  ab_av1::command::sample_encode] encoding sample 5/5 crf 43
+2026-10-17 10:46:20 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:20Z INFO  ab_av1::vmaf] vmaf input_00003.sample387+480f.av1_nvenc.crf42.p4.mp4 vs reference input_00003.sample387+480f.mkv
+2026-10-17 10:46:20 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 35.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.81x
+2026-10-17 10:46:20 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 35.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.79x
+2026-10-17 10:46:20 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 35.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.82x
+2026-10-17 10:46:20 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 35.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.75x
+2026-10-17 10:46:21 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:21Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 446.027398 VMAF 87.93 (%)
+2026-10-17 10:46:21 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:21Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 44
+2026-10-17 10:46:25 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:25Z INFO  ab_av1::vmaf] vmaf input_00000.sample247+480f.av1_nvenc.crf40.p4.mp4 vs reference input_00000.sample247+480f.mkv
+2026-10-17 10:46:25 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 40.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.74x
+2026-10-17 10:46:25 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 40.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.72x
+2026-10-17 10:46:25 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 40.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.76x
+2026-10-17 10:46:25 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 40.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.69x
+2026-10-17 10:46:26 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:26Z INFO  ab_av1::command::sample_encode] sample 4/5 crf 428.250667 VMAF 89.60 (%)
+2026-10-17 10:46:26 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:26Z INFO  ab_av1::command::sample_encode] encoding sample 5/5 crf 42
+2026-10-17 10:46:26 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:26Z INFO  ab_av1::vmaf] vmaf input_00001.sample495+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00001.sample495+480f.mkv
+2026-10-17 10:46:30 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 45.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.68x
+2026-10-17 10:46:30 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 45.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.66x
+2026-10-17 10:46:30 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 45.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.70x
+2026-10-17 10:46:30 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 45.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.63x
+2026-10-17 10:46:32 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:32Z INFO  ab_av1::vmaf] vmaf input_00002.sample248+480f.av1_nvenc.crf44.p4.mp4 vs reference input_00002.sample248+480f.mkv
+2026-10-17 10:46:32 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:32Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 4010.079179 VMAF 89.42 (%)
+2026-10-17 10:46:32 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:32Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 40
+2026-10-17 10:46:33 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:33Z INFO  ab_av1::command::sample_encode] sample 5/5 crf 437.082738 VMAF 89.81 (%)
+2026-10-17 10:46:33 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:33Z INFO  ab_av1::command::sample_encode] crf 43 VMAF 89.15 predicted video stream size 33.22 MiB (9%) taking 4 minutes
+2026-10-17 10:46:33 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:33Z INFO  ab_av1::command::encode] encoding encoded_00001.mp4
+2026-10-17 10:46:35 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 50.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.62x
+2026-10-17 10:46:35 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 50.1s, output=48.0 B, write_rate=9.0 B/s, input_duration/elapsed=2.60x
+2026-10-17 10:46:35 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 50.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.64x
+2026-10-17 10:46:35 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 50.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.57x
+2026-10-17 10:46:35 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:35Z INFO  ab_av1::vmaf] vmaf input_00003.sample489+480f.av1_nvenc.crf42.p4.mp4 vs reference input_00003.sample489+480f.mkv
+2026-10-17 10:46:36 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:36Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 445.297377 VMAF 89.91 (%)
+2026-10-17 10:46:36 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:36Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 44
+2026-10-17 10:46:39 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:39Z INFO  ab_av1::command::sample_encode] sample 5/5 crf 427.2534227 VMAF 89.58 (%)
+2026-10-17 10:46:39 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:39Z INFO  ab_av1::command::sample_encode] crf 42 VMAF 89.02 predicted video stream size 30.23 MiB (9%) taking 4 minutes
+2026-10-17 10:46:39 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:39Z INFO  ab_av1::command::encode] encoding encoded_00003.mp4
+2026-10-17 10:46:40 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:40Z INFO  ab_av1::vmaf] vmaf input_00000.sample336+480f.av1_nvenc.crf40.p4.mp4 vs reference input_00000.sample336+480f.mkv
+2026-10-17 10:46:40 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=3m 55.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.57x
+2026-10-17 10:46:40 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=3m 55.1s, output=1.0 MB, write_rate=204.7 KB/s, input_duration/elapsed=2.55x
+2026-10-17 10:46:40 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=3m 55.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.58x
+2026-10-17 10:46:40 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=3m 55.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.52x
+2026-10-17 10:46:43 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:43Z INFO  ab_av1::vmaf] vmaf input_00002.sample338+480f.av1_nvenc.crf44.p4.mp4 vs reference input_00002.sample338+480f.mkv
+2026-10-17 10:46:45 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:45Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 4011.812478 VMAF 90.67 (%)
+2026-10-17 10:46:45 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:45Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 40
+2026-10-17 10:46:45 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 0.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.51x
+2026-10-17 10:46:45 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 0.1s, output=2.8 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.50x
+2026-10-17 10:46:45 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 0.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.53x
+2026-10-17 10:46:45 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 0.1s, output=1.3 MB, write_rate=256.0 KB/s, input_duration/elapsed=2.46x
+2026-10-17 10:46:47 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:47Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 446.6958175 VMAF 89.31 (%)
+2026-10-17 10:46:47 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:47Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 44
+2026-10-17 10:46:49 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:46:49Z INFO  ab_av1::command::encode] 11%, 106 fps, eta 2 minutes
+2026-10-17 10:46:50 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 5.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.46x
+2026-10-17 10:46:50 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 5.1s, output=5.0 MB, write_rate=460.7 KB/s, input_duration/elapsed=2.44x
+2026-10-17 10:46:50 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 5.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.48x
+2026-10-17 10:46:50 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 5.1s, output=3.0 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.41x
+2026-10-17 10:46:51 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:51Z INFO  ab_av1::vmaf] vmaf input_00000.sample425+480f.av1_nvenc.crf40.p4.mp4 vs reference input_00000.sample425+480f.mkv
+2026-10-17 10:46:53 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:53Z INFO  ab_av1::vmaf] vmaf input_00002.sample427+480f.av1_nvenc.crf44.p4.mp4 vs reference input_00002.sample427+480f.mkv
+2026-10-17 10:46:55 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:55Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 409.529744 VMAF 89.40 (%)
+2026-10-17 10:46:55 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:46:55Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 40
+2026-10-17 10:46:55 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 10.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.41x
+2026-10-17 10:46:55 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 10.1s, output=7.0 MB, write_rate=409.4 KB/s, input_duration/elapsed=2.40x
+2026-10-17 10:46:55 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 10.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.43x
+2026-10-17 10:46:55 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 10.1s, output=5.3 MB, write_rate=460.6 KB/s, input_duration/elapsed=2.36x
+2026-10-17 10:46:56 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:46:56Z INFO  ab_av1::command::encode] 11%, 102 fps, eta 2 minutes
+2026-10-17 10:46:58 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:58Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 446.4032245 VMAF 88.73 (%)
+2026-10-17 10:46:58 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:46:58Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 44
+2026-10-17 10:47:00 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 15.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.37x
+2026-10-17 10:47:00 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 15.1s, output=9.0 MB, write_rate=409.5 KB/s, input_duration/elapsed=2.35x
+2026-10-17 10:47:00 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 15.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.38x
+2026-10-17 10:47:00 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 15.1s, output=7.3 MB, write_rate=409.5 KB/s, input_duration/elapsed=2.32x
+2026-10-17 10:47:01 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:47:01Z INFO  ab_av1::vmaf] vmaf input_00000.sample514+480f.av1_nvenc.crf40.p4.mp4 vs reference input_00000.sample514+480f.mkv
+2026-10-17 10:47:04 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:04Z INFO  ab_av1::vmaf] vmaf input_00002.sample517+480f.av1_nvenc.crf44.p4.mp4 vs reference input_00002.sample517+480f.mkv
+2026-10-17 10:47:05 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:47:05Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 4012.431868 VMAF 88.27 (%)
+2026-10-17 10:47:05 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:47:05Z INFO  ab_av1::command::sample_encode] crf 40 VMAF 89.22 predicted video stream size 44.17 MiB (12%) taking 4 minutes
+2026-10-17 10:47:05 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:47:05Z INFO  ab_av1::command::encode] encoding encoded_00000.mp4
+2026-10-17 10:47:05 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 20.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.32x
+2026-10-17 10:47:05 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 20.1s, output=11.3 MB, write_rate=460.6 KB/s, input_duration/elapsed=2.30x
+2026-10-17 10:47:05 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 20.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.33x
+2026-10-17 10:47:05 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 20.1s, output=9.5 MB, write_rate=460.6 KB/s, input_duration/elapsed=2.27x
+2026-10-17 10:47:05 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:47:05Z INFO  ab_av1::command::encode] 24%, 109 fps, eta 2 minutes
+2026-10-17 10:47:09 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:09Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 447.34142 VMAF 87.93 (%)
+2026-10-17 10:47:09 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:09Z INFO  ab_av1::command::sample_encode] crf 44 VMAF 88.84 predicted video stream size 22.74 MiB (6%) taking 4 minutes
+2026-10-17 10:47:09 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:09Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 43
+2026-10-17 10:47:10 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 25.1s, output=256.0 KB, write_rate=51.2 KB/s, input_duration/elapsed=2.28x
+2026-10-17 10:47:10 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 25.1s, output=13.0 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.26x
+2026-10-17 10:47:10 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 25.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.29x
+2026-10-17 10:47:10 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 25.1s, output=11.3 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.23x
+2026-10-17 10:47:12 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:47:12Z INFO  ab_av1::command::encode] 24%, 108 fps, eta 2 minutes
+2026-10-17 10:47:15 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 30.1s, output=1.5 MB, write_rate=255.9 KB/s, input_duration/elapsed=2.23x
+2026-10-17 10:47:15 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 30.1s, output=14.5 MB, write_rate=307.1 KB/s, input_duration/elapsed=2.22x
+2026-10-17 10:47:15 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 30.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.25x
+2026-10-17 10:47:15 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 30.1s, output=12.8 MB, write_rate=307.1 KB/s, input_duration/elapsed=2.19x
+2026-10-17 10:47:15 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:15Z INFO  ab_av1::vmaf] vmaf input_00002.sample69+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00002.sample69+480f.mkv
+2026-10-17 10:47:19 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:19Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 437.539437 VMAF 89.57 (%)
+2026-10-17 10:47:19 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:19Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 43
+2026-10-17 10:47:20 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 35.1s, output=2.8 MB, write_rate=255.9 KB/s, input_duration/elapsed=2.19x
+2026-10-17 10:47:20 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 35.1s, output=16.3 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.18x
+2026-10-17 10:47:20 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 35.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.21x
+2026-10-17 10:47:20 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 35.1s, output=14.3 MB, write_rate=307.1 KB/s, input_duration/elapsed=2.15x
+2026-10-17 10:47:21 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:47:21Z INFO  ab_av1::command::encode] 9%, 87 fps, eta 3 minutes
+2026-10-17 10:47:25 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:25Z INFO  ab_av1::vmaf] vmaf input_00002.sample159+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00002.sample159+480f.mkv
+2026-10-17 10:47:25 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 40.1s, output=5.3 MB, write_rate=511.9 KB/s, input_duration/elapsed=2.15x
+2026-10-17 10:47:25 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 40.1s, output=17.8 MB, write_rate=307.1 KB/s, input_duration/elapsed=2.14x
+2026-10-17 10:47:25 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 40.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.17x
+2026-10-17 10:47:25 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 40.1s, output=15.5 MB, write_rate=255.9 KB/s, input_duration/elapsed=2.11x
+2026-10-17 10:47:28 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:28Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 436.532322 VMAF 88.48 (%)
+2026-10-17 10:47:28 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:28Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 43
+2026-10-17 10:47:30 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 45.1s, output=7.5 MB, write_rate=460.7 KB/s, input_duration/elapsed=2.12x
+2026-10-17 10:47:30 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 45.1s, output=18.8 MB, write_rate=204.7 KB/s, input_duration/elapsed=2.10x
+2026-10-17 10:47:30 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 45.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.13x
+2026-10-17 10:47:30 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 45.1s, output=16.8 MB, write_rate=255.9 KB/s, input_duration/elapsed=2.07x
+2026-10-17 10:47:34 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:34Z INFO  ab_av1::vmaf] vmaf input_00002.sample248+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00002.sample248+480f.mkv
+2026-10-17 10:47:35 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 50.1s, output=9.3 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.08x
+2026-10-17 10:47:35 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 50.1s, output=20.0 MB, write_rate=255.9 KB/s, input_duration/elapsed=2.07x
+2026-10-17 10:47:35 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 50.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.09x
+2026-10-17 10:47:35 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 50.1s, output=18.3 MB, write_rate=307.1 KB/s, input_duration/elapsed=2.04x
+2026-10-17 10:47:37 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:47:37Z INFO  ab_av1::command::encode] 21%, 97 fps, eta 2 minutes
+2026-10-17 10:47:37 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:37Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 435.6652107 VMAF 90.29 (%)
+2026-10-17 10:47:37 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:37Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 43
+2026-10-17 10:47:37 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:47:37Z INFO  ab_av1::command::encode] 48%, 109 fps, eta 69 seconds
+2026-10-17 10:47:40 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=4m 55.1s, output=11.0 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.04x
+2026-10-17 10:47:40 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=4m 55.1s, output=21.5 MB, write_rate=307.1 KB/s, input_duration/elapsed=2.03x
+2026-10-17 10:47:40 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=4m 55.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.06x
+2026-10-17 10:47:40 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=4m 55.1s, output=19.5 MB, write_rate=255.9 KB/s, input_duration/elapsed=2.00x
+2026-10-17 10:47:44 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:44Z INFO  ab_av1::vmaf] vmaf input_00002.sample338+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00002.sample338+480f.mkv
+2026-10-17 10:47:44 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:47:44Z INFO  ab_av1::command::encode] 48%, 106 fps, eta 70 seconds
+2026-10-17 10:47:45 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 0.1s, output=12.8 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.01x
+2026-10-17 10:47:45 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 0.1s, output=23.3 MB, write_rate=358.4 KB/s, input_duration/elapsed=2.00x
+2026-10-17 10:47:45 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 0.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=2.02x
+2026-10-17 10:47:45 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 0.1s, output=21.0 MB, write_rate=307.2 KB/s, input_duration/elapsed=1.97x
+2026-10-17 10:47:47 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:47Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 437.1865587 VMAF 89.73 (%)
+2026-10-17 10:47:47 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:47Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 43
+2026-10-17 10:47:50 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 5.1s, output=14.0 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.98x
+2026-10-17 10:47:50 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 5.1s, output=24.5 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.96x
+2026-10-17 10:47:50 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 5.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=1.99x
+2026-10-17 10:47:50 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 5.1s, output=22.3 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.94x
+2026-10-17 10:47:53 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:53Z INFO  ab_av1::vmaf] vmaf input_00002.sample427+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00002.sample427+480f.mkv
+2026-10-17 10:47:55 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 10.1s, output=15.5 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.95x
+2026-10-17 10:47:55 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 10.1s, output=26.0 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.93x
+2026-10-17 10:47:55 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 10.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=1.96x
+2026-10-17 10:47:55 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 10.1s, output=23.5 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.91x
+2026-10-17 10:47:57 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:57Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 436.9706283 VMAF 89.22 (%)
+2026-10-17 10:47:57 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:47:57Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 43
+2026-10-17 10:48:00 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 15.1s, output=16.8 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.91x
+2026-10-17 10:48:00 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 15.1s, output=27.5 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.90x
+2026-10-17 10:48:00 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 15.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=1.93x
+2026-10-17 10:48:00 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 15.1s, output=24.8 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.88x
+2026-10-17 10:48:03 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:48:03Z INFO  ab_av1::vmaf] vmaf input_00002.sample517+480f.av1_nvenc.crf43.p4.mp4 vs reference input_00002.sample517+480f.mkv
+2026-10-17 10:48:05 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 20.1s, output=18.3 MB, write_rate=307.2 KB/s, input_duration/elapsed=1.88x
+2026-10-17 10:48:05 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 20.1s, output=28.8 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.87x
+2026-10-17 10:48:05 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 20.1s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=1.90x
+2026-10-17 10:48:05 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 20.1s, output=26.0 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.85x
+2026-10-17 10:48:07 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:48:07Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 437.9566455 VMAF 88.43 (%)
+2026-10-17 10:48:07 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:48:07Z INFO  ab_av1::command::sample_encode] crf 43 VMAF 89.28 predicted video stream size 24.55 MiB (7%) taking 3 minutes
+2026-10-17 10:48:07 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:48:07Z INFO  ab_av1::command::encode] encoding encoded_00002.mp4
+2026-10-17 10:48:09 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:48:09Z INFO  ab_av1::command::encode] 44%, 101 fps, eta 80 seconds
+2026-10-17 10:48:10 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 25.1s, output=20.3 MB, write_rate=409.5 KB/s, input_duration/elapsed=1.86x
+2026-10-17 10:48:10 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 25.1s, output=29.8 MB, write_rate=204.7 KB/s, input_duration/elapsed=1.84x
+2026-10-17 10:48:10 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 25.1s, output=512.0 KB, write_rate=102.4 KB/s, input_duration/elapsed=1.87x
+2026-10-17 10:48:10 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 25.1s, output=27.5 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.82x
+2026-10-17 10:48:15 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 30.1s, output=22.0 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.83x
+2026-10-17 10:48:15 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 30.1s, output=31.0 MB, write_rate=256.0 KB/s, input_duration/elapsed=1.81x
+2026-10-17 10:48:15 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 30.1s, output=2.0 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.84x
+2026-10-17 10:48:15 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 30.1s, output=28.8 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.79x
+2026-10-17 10:48:20 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 35.1s, output=24.0 MB, write_rate=409.5 KB/s, input_duration/elapsed=1.80x
+2026-10-17 10:48:20 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 35.1s, output=32.0 MB, write_rate=204.7 KB/s, input_duration/elapsed=1.79x
+2026-10-17 10:48:20 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 35.1s, output=3.3 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.81x
+2026-10-17 10:48:20 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 35.1s, output=30.0 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.76x
+2026-10-17 10:48:23 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:48:23Z INFO  ab_av1::command::encode] 11%, 96 fps, eta 2 minutes
+2026-10-17 10:48:25 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 40.1s, output=25.5 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.77x
+2026-10-17 10:48:25 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 40.1s, output=32.8 MB, write_rate=153.6 KB/s, input_duration/elapsed=1.76x
+2026-10-17 10:48:25 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 40.1s, output=4.5 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.78x
+2026-10-17 10:48:25 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 40.1s, output=31.3 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.74x
+2026-10-17 10:48:30 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 45.1s, output=27.5 MB, write_rate=409.5 KB/s, input_duration/elapsed=1.75x
+2026-10-17 10:48:30 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 45.1s, output=34.5 MB, write_rate=358.2 KB/s, input_duration/elapsed=1.74x
+2026-10-17 10:48:30 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 45.1s, output=5.8 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.76x
+2026-10-17 10:48:30 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 45.1s, output=32.8 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.71x
+2026-10-17 10:48:35 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 50.1s, output=29.3 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.72x
+2026-10-17 10:48:35 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 50.1s, output=36.0 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.71x
+2026-10-17 10:48:35 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 50.1s, output=7.0 MB, write_rate=256.0 KB/s, input_duration/elapsed=1.73x
+2026-10-17 10:48:35 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 50.1s, output=34.3 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.69x
+2026-10-17 10:48:39 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:48:39Z INFO  ab_av1::command::encode] 22%, 99 fps, eta 2 minutes
+2026-10-17 10:48:40 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=5m 55.1s, output=30.8 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.70x
+2026-10-17 10:48:40 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=5m 55.1s, output=37.0 MB, write_rate=204.8 KB/s, input_duration/elapsed=1.69x
+2026-10-17 10:48:40 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=5m 55.1s, output=8.5 MB, write_rate=307.2 KB/s, input_duration/elapsed=1.71x
+2026-10-17 10:48:40 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=5m 55.1s, output=35.5 MB, write_rate=256.0 KB/s, input_duration/elapsed=1.67x
+2026-10-17 10:48:41 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: [2026-10-17T10:48:41Z INFO  ab_av1::command::encode] 94%, 106 fps, eta 8 seconds
+2026-10-17 10:48:45 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=6m 0.1s, output=32.3 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.68x
+2026-10-17 10:48:45 | INFO    | [loc-neg-benchmark-chunk-00002] Compression status: elapsed=6m 0.1s, output=38.0 MB, write_rate=204.8 KB/s, input_duration/elapsed=1.66x
+2026-10-17 10:48:45 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 0.1s, output=9.8 MB, write_rate=256.0 KB/s, input_duration/elapsed=1.68x
+2026-10-17 10:48:45 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=6m 0.1s, output=36.8 MB, write_rate=256.0 KB/s, input_duration/elapsed=1.64x
+2026-10-17 10:48:48 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: [2026-10-17T10:48:48Z INFO  ab_av1::command::encode] 95%, 105 fps, eta 7 seconds
+2026-10-17 10:48:50 | INFO    | [loc-neg-benchmark-chunk-00002] ab-av1 stderr: Encoded 39.45 MiB (11%)
+2026-10-17 10:48:50 | INFO    | [loc-neg-benchmark-chunk-00005] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00004.mp4
+2026-10-17 10:48:50 | INFO    | [loc-neg-benchmark-chunk-00005] Compression attempt 1/2 (target_vmaf=89.00, crf_range=targeted, sample_every=2m)
+2026-10-17 10:48:50 | INFO    | [loc-neg-benchmark-chunk-00005] Command: /app/ab-av1 auto-encode -i /bench/loc-neg-benchmark_chunks/input/input_00004.mp4 -o /bench/loc-neg-benchmark_chunks/encoded/encoded_00004.mp4 -e av1_nvenc --preset p4 --min-vmaf 89 --vmaf model=version=vmaf_v0.6.1neg --vmaf pool=harmonic_mean --vmaf n_subsample=1 --vmaf n_threads=0 --vmaf-fps 0 --vmaf-scale none --vmaf-cuda --min-crf 22 --max-crf 51 --crf-increment 1 --enc rc=vbr --enc b:v=0 --enc tune=uhq --enc multipass=fullres --enc rc-lookahead=24 --enc lookahead_level=3 --enc g=900 --enc tile-columns=1 --enc tile-rows=1 --enc qp_cb_offset=2 --enc qp_cr_offset=2 --enc bf=5 --enc b_ref_mode=middle --enc temporal-aq=1 --sample-every 2m --enc-input hwaccel=cuda --vfilter setsar=1
+2026-10-17 10:48:50 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:48:50Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 36
+2026-10-17 10:48:50 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=6m 5.1s, output=33.8 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.65x
+2026-10-17 10:48:50 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 5.1s, output=11.0 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.66x
+2026-10-17 10:48:50 | INFO    | [loc-neg-benchmark-chunk-00004] Compression status: elapsed=6m 5.1s, output=38.0 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.62x
+2026-10-17 10:48:55 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=120.24x
+2026-10-17 10:48:55 | INFO    | [loc-neg-benchmark-chunk-00004] ab-av1 stderr: Encoded 39.68 MiB (11%)
+2026-10-17 10:48:55 | INFO    | [loc-neg-benchmark-chunk-00006] ffprobe duration: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /bench/loc-neg-benchmark_chunks/input/input_00005.mp4
+2026-10-17 10:48:55 | INFO    | [loc-neg-benchmark-chunk-00006] Compression attempt 1/2 (target_vmaf=89.00, crf_range=targeted, sample_every=2m)
+2026-10-17 10:48:55 | INFO    | [loc-neg-benchmark-chunk-00006] Command: /app/ab-av1 auto-encode -i /bench/loc-neg-benchmark_chunks/input/input_00005.mp4 -o /bench/loc-neg-benchmark_chunks/encoded/encoded_00005.mp4 -e av1_nvenc --preset p4 --min-vmaf 89 --vmaf model=version=vmaf_v0.6.1neg --vmaf pool=harmonic_mean --vmaf n_subsample=1 --vmaf n_threads=0 --vmaf-fps 0 --vmaf-scale none --vmaf-cuda --min-crf 22 --max-crf 51 --crf-increment 1 --enc rc=vbr --enc b:v=0 --enc tune=uhq --enc multipass=fullres --enc rc-lookahead=24 --enc lookahead_level=3 --enc g=900 --enc tile-columns=1 --enc tile-rows=1 --enc qp_cb_offset=2 --enc qp_cr_offset=2 --enc bf=5 --enc b_ref_mode=middle --enc temporal-aq=1 --sample-every 2m --enc-input hwaccel=cuda --vfilter setsar=1
+2026-10-17 10:48:55 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=6m 10.1s, output=35.5 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.63x
+2026-10-17 10:48:55 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:48:55Z INFO  ab_av1::command::sample_encode] encoding sample 1/3 crf 36
+2026-10-17 10:48:55 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 10.1s, output=12.3 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.64x
+2026-10-17 10:48:57 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:48:57Z INFO  ab_av1::vmaf] vmaf input_00004.sample68+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00004.sample68+480f.mkv
+2026-10-17 10:49:00 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:00Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 3616.20054 VMAF 91.19 (%)
+2026-10-17 10:49:00 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:00Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 36
+2026-10-17 10:49:00 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=60.14x
+2026-10-17 10:49:00 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=55.46x
+2026-10-17 10:49:00 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=6m 15.1s, output=37.3 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.61x
+2026-10-17 10:49:00 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 15.1s, output=14.0 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.62x
+2026-10-17 10:49:02 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:02Z INFO  ab_av1::vmaf] vmaf input_00005.sample54+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00005.sample54+480f.mkv
+2026-10-17 10:49:05 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=40.09x
+2026-10-17 10:49:05 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=27.73x
+2026-10-17 10:49:05 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=6m 20.1s, output=39.8 MB, write_rate=511.8 KB/s, input_duration/elapsed=1.59x
+2026-10-17 10:49:05 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 20.1s, output=15.3 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.60x
+2026-10-17 10:49:06 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:06Z INFO  ab_av1::command::sample_encode] sample 1/3 crf 3617.012623 VMAF 91.10 (%)
+2026-10-17 10:49:06 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:06Z INFO  ab_av1::command::sample_encode] encoding sample 2/3 crf 36
+2026-10-17 10:49:06 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:06Z INFO  ab_av1::vmaf] vmaf input_00004.sample157+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00004.sample157+480f.mkv
+2026-10-17 10:49:10 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:10Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 3617.625164 VMAF 91.20 (%)
+2026-10-17 10:49:10 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:10Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 36
+2026-10-17 10:49:10 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=30.07x
+2026-10-17 10:49:10 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=18.49x
+2026-10-17 10:49:10 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=6m 25.1s, output=42.8 MB, write_rate=614.3 KB/s, input_duration/elapsed=1.57x
+2026-10-17 10:49:10 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 25.1s, output=16.8 MB, write_rate=307.2 KB/s, input_duration/elapsed=1.58x
+2026-10-17 10:49:11 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:49:11Z INFO  ab_av1::command::encode] 46%, 104 fps, eta 77 seconds
+2026-10-17 10:49:12 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:12Z INFO  ab_av1::vmaf] vmaf input_00005.sample128+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00005.sample128+480f.mkv
+2026-10-17 10:49:13 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: [2026-10-17T10:49:13Z INFO  ab_av1::command::encode] 91%, 103 fps, eta 13 seconds
+2026-10-17 10:49:15 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=24.06x
+2026-10-17 10:49:15 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=13.87x
+2026-10-17 10:49:15 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=6m 30.1s, output=45.3 MB, write_rate=511.8 KB/s, input_duration/elapsed=1.55x
+2026-10-17 10:49:15 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 30.1s, output=18.5 MB, write_rate=358.1 KB/s, input_duration/elapsed=1.56x
+2026-10-17 10:49:16 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:16Z INFO  ab_av1::command::sample_encode] sample 2/3 crf 3616.166168 VMAF 91.25 (%)
+2026-10-17 10:49:16 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:16Z INFO  ab_av1::command::sample_encode] encoding sample 3/3 crf 36
+2026-10-17 10:49:16 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:16Z INFO  ab_av1::vmaf] vmaf input_00004.sample246+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00004.sample246+480f.mkv
+2026-10-17 10:49:20 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:20Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 3618.898794 VMAF 91.72 (%)
+2026-10-17 10:49:20 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:20Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 36
+2026-10-17 10:49:20 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=20.05x
+2026-10-17 10:49:20 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=11.09x
+2026-10-17 10:49:20 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=6m 35.1s, output=47.0 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.53x
+2026-10-17 10:49:20 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 35.1s, output=20.3 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.54x
+2026-10-17 10:49:22 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:22Z INFO  ab_av1::vmaf] vmaf input_00005.sample203+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00005.sample203+480f.mkv
+2026-10-17 10:49:25 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=17.18x
+2026-10-17 10:49:25 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=9.24x
+2026-10-17 10:49:25 | INFO    | [loc-neg-benchmark-chunk-00001] Compression status: elapsed=6m 40.1s, output=48.5 MB, write_rate=298.5 KB/s, input_duration/elapsed=1.51x
+2026-10-17 10:49:25 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 40.1s, output=21.5 MB, write_rate=255.9 KB/s, input_duration/elapsed=1.52x
+2026-10-17 10:49:26 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:26Z INFO  ab_av1::command::sample_encode] sample 3/3 crf 3614.306254 VMAF 91.92 (%)
+2026-10-17 10:49:26 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:26Z INFO  ab_av1::command::sample_encode] crf 36 VMAF 91.43 predicted video stream size 22.98 MiB (16%) taking 2 minutes
+2026-10-17 10:49:26 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:26Z INFO  ab_av1::command::sample_encode] encoding sample 1/3 crf 45
+2026-10-17 10:49:27 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:27Z INFO  ab_av1::vmaf] vmaf input_00004.sample335+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00004.sample335+480f.mkv
+2026-10-17 10:49:27 | INFO    | [loc-neg-benchmark-chunk-00001] ab-av1 stderr: Encoded 48.46 MiB (13%)
+2026-10-17 10:49:30 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:30Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 3615.569521 VMAF 91.34 (%)
+2026-10-17 10:49:30 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:30Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 36
+2026-10-17 10:49:30 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=15.04x
+2026-10-17 10:49:30 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.92x
+2026-10-17 10:49:30 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 45.1s, output=23.0 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.50x
+2026-10-17 10:49:32 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:32Z INFO  ab_av1::vmaf] vmaf input_00005.sample54+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00005.sample54+480f.mkv
+2026-10-17 10:49:35 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=13.37x
+2026-10-17 10:49:35 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.93x
+2026-10-17 10:49:35 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 50.1s, output=24.8 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.48x
+2026-10-17 10:49:35 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:35Z INFO  ab_av1::vmaf] vmaf input_00004.sample424+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00004.sample424+480f.mkv
+2026-10-17 10:49:36 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:36Z INFO  ab_av1::command::sample_encode] sample 1/3 crf 457.6802263 VMAF 86.49 (%)
+2026-10-17 10:49:36 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:36Z INFO  ab_av1::command::sample_encode] encoding sample 2/3 crf 45
+2026-10-17 10:49:40 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:40Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 3621.506178 VMAF 91.36 (%)
+2026-10-17 10:49:40 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:40Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 36
+2026-10-17 10:49:40 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=12.03x
+2026-10-17 10:49:40 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.16x
+2026-10-17 10:49:40 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=6m 55.1s, output=26.5 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.46x
+2026-10-17 10:49:42 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:42Z INFO  ab_av1::vmaf] vmaf input_00005.sample128+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00005.sample128+480f.mkv
+2026-10-17 10:49:45 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=10.94x
+2026-10-17 10:49:45 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:45Z INFO  ab_av1::command::sample_encode] sample 2/3 crf 456.5260386 VMAF 87.54 (%)
+2026-10-17 10:49:45 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:45Z INFO  ab_av1::command::sample_encode] encoding sample 3/3 crf 45
+2026-10-17 10:49:45 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.55x
+2026-10-17 10:49:45 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=7m 0.1s, output=28.0 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.44x
+2026-10-17 10:49:46 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:46Z INFO  ab_av1::vmaf] vmaf input_00004.sample512+480f.av1_nvenc.crf36.p4.mp4 vs reference input_00004.sample512+480f.mkv
+2026-10-17 10:49:49 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:49Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 3617.144426 VMAF 91.35 (%)
+2026-10-17 10:49:49 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:49Z INFO  ab_av1::command::sample_encode] crf 36 VMAF 91.36 predicted video stream size 65.71 MiB (18%) taking 3 minutes
+2026-10-17 10:49:49 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:49Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 45
+2026-10-17 10:49:50 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=10.02x
+2026-10-17 10:49:50 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.04x
+2026-10-17 10:49:50 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=7m 5.1s, output=29.5 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.43x
+2026-10-17 10:49:52 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:52Z INFO  ab_av1::vmaf] vmaf input_00005.sample203+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00005.sample203+480f.mkv
+2026-10-17 10:49:54 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:54Z INFO  ab_av1::command::sample_encode] sample 3/3 crf 455.9409223 VMAF 88.74 (%)
+2026-10-17 10:49:54 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:54Z INFO  ab_av1::command::sample_encode] crf 45 VMAF 87.59 predicted video stream size 9.80 MiB (7%) taking 89 seconds
+2026-10-17 10:49:54 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:49:54Z INFO  ab_av1::command::sample_encode] encoding sample 1/3 crf 42
+2026-10-17 10:49:55 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:55Z INFO  ab_av1::vmaf] vmaf input_00004.sample68+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00004.sample68+480f.mkv
+2026-10-17 10:49:55 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=9.25x
+2026-10-17 10:49:55 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.62x
+2026-10-17 10:49:55 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=7m 10.1s, output=31.0 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.41x
+2026-10-17 10:49:58 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:58Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 457.038471 VMAF 87.21 (%)
+2026-10-17 10:49:58 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:49:58Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 45
+2026-10-17 10:50:00 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=8.59x
+2026-10-17 10:50:00 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.27x
+2026-10-17 10:50:00 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=7m 15.1s, output=32.5 MB, write_rate=307.1 KB/s, input_duration/elapsed=1.39x
+2026-10-17 10:50:01 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:01Z INFO  ab_av1::vmaf] vmaf input_00005.sample54+480f.av1_nvenc.crf42.p4.mp4 vs reference input_00005.sample54+480f.mkv
+2026-10-17 10:50:04 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:04Z INFO  ab_av1::vmaf] vmaf input_00004.sample157+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00004.sample157+480f.mkv
+2026-10-17 10:50:04 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:04Z INFO  ab_av1::command::sample_encode] sample 1/3 crf 429.772047 VMAF 88.37 (%)
+2026-10-17 10:50:04 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:04Z INFO  ab_av1::command::sample_encode] encoding sample 2/3 crf 42
+2026-10-17 10:50:05 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=8.02x
+2026-10-17 10:50:05 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.96x
+2026-10-17 10:50:05 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=7m 20.1s, output=34.5 MB, write_rate=409.4 KB/s, input_duration/elapsed=1.38x
+2026-10-17 10:50:08 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:08Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 457.5195036 VMAF 87.52 (%)
+2026-10-17 10:50:08 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:08Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 45
+2026-10-17 10:50:10 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.52x
+2026-10-17 10:50:10 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.70x
+2026-10-17 10:50:10 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=7m 25.1s, output=36.3 MB, write_rate=358.3 KB/s, input_duration/elapsed=1.36x
+2026-10-17 10:50:10 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:10Z INFO  ab_av1::vmaf] vmaf input_00005.sample128+480f.av1_nvenc.crf42.p4.mp4 vs reference input_00005.sample128+480f.mkv
+2026-10-17 10:50:13 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:13Z INFO  ab_av1::vmaf] vmaf input_00004.sample246+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00004.sample246+480f.mkv
+2026-10-17 10:50:14 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:14Z INFO  ab_av1::command::sample_encode] sample 2/3 crf 428.5286255 VMAF 89.13 (%)
+2026-10-17 10:50:14 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:14Z INFO  ab_av1::command::sample_encode] encoding sample 3/3 crf 42
+2026-10-17 10:50:15 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=7.08x
+2026-10-17 10:50:15 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.47x
+2026-10-17 10:50:15 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: [2026-10-17T10:50:15Z INFO  ab_av1::command::encode] 99%, 113 fps, eta 1 second
+2026-10-17 10:50:15 | INFO    | [loc-neg-benchmark-chunk-00003] Compression status: elapsed=7m 30.1s, output=38.3 MB, write_rate=409.5 KB/s, input_duration/elapsed=1.35x
+2026-10-17 10:50:17 | INFO    | [loc-neg-benchmark-chunk-00003] ab-av1 stderr: Encoded 38.82 MiB (10%)
+2026-10-17 10:50:17 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:17Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 458.064735 VMAF 87.89 (%)
+2026-10-17 10:50:17 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:17Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 45
+2026-10-17 10:50:20 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:20Z INFO  ab_av1::vmaf] vmaf input_00005.sample203+480f.av1_nvenc.crf42.p4.mp4 vs reference input_00005.sample203+480f.mkv
+2026-10-17 10:50:20 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.68x
+2026-10-17 10:50:20 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.26x
+2026-10-17 10:50:22 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:22Z INFO  ab_av1::vmaf] vmaf input_00004.sample335+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00004.sample335+480f.mkv
+2026-10-17 10:50:23 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:23Z INFO  ab_av1::command::sample_encode] sample 3/3 crf 427.4082494 VMAF 90.04 (%)
+2026-10-17 10:50:23 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:23Z INFO  ab_av1::command::sample_encode] crf 42 VMAF 89.18 predicted video stream size 12.53 MiB (9%) taking 83 seconds
+2026-10-17 10:50:23 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:23Z INFO  ab_av1::command::encode] encoding encoded_00005.mp4
+2026-10-17 10:50:25 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:25Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 456.8133574 VMAF 87.65 (%)
+2026-10-17 10:50:25 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:25Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 45
+2026-10-17 10:50:25 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.33x
+2026-10-17 10:50:25 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 30.0s, output=256.0 KB, write_rate=51.2 KB/s, input_duration/elapsed=3.08x
+2026-10-17 10:50:30 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=6.01x
+2026-10-17 10:50:30 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 35.0s, output=2.0 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.92x
+2026-10-17 10:50:30 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:30Z INFO  ab_av1::vmaf] vmaf input_00004.sample424+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00004.sample424+480f.mkv
+2026-10-17 10:50:33 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:33Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 459.692848 VMAF 87.22 (%)
+2026-10-17 10:50:33 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:33Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 45
+2026-10-17 10:50:35 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 45.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.73x
+2026-10-17 10:50:35 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 40.0s, output=4.3 MB, write_rate=460.6 KB/s, input_duration/elapsed=2.77x
+2026-10-17 10:50:39 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:39Z INFO  ab_av1::command::encode] 30%, 124 fps, eta 38 seconds
+2026-10-17 10:50:39 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:39Z INFO  ab_av1::vmaf] vmaf input_00004.sample512+480f.av1_nvenc.crf45.p4.mp4 vs reference input_00004.sample512+480f.mkv
+2026-10-17 10:50:40 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 50.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.47x
+2026-10-17 10:50:40 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 45.0s, output=6.0 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.64x
+2026-10-17 10:50:43 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:43Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 457.348062 VMAF 86.90 (%)
+2026-10-17 10:50:43 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:43Z INFO  ab_av1::command::sample_encode] crf 45 VMAF 87.40 predicted video stream size 28.51 MiB (8%) taking 3 minutes
+2026-10-17 10:50:43 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:43Z INFO  ab_av1::command::sample_encode] encoding sample 1/6 crf 41
+2026-10-17 10:50:45 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=1m 55.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.23x
+2026-10-17 10:50:45 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 50.0s, output=7.8 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.52x
+2026-10-17 10:50:48 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:48Z INFO  ab_av1::vmaf] vmaf input_00004.sample68+480f.av1_nvenc.crf41.p4.mp4 vs reference input_00004.sample68+480f.mkv
+2026-10-17 10:50:50 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 0.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=5.01x
+2026-10-17 10:50:50 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=1m 55.0s, output=9.5 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.41x
+2026-10-17 10:50:51 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:51Z INFO  ab_av1::command::sample_encode] sample 1/6 crf 419.473633 VMAF 89.10 (%)
+2026-10-17 10:50:51 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:51Z INFO  ab_av1::command::sample_encode] encoding sample 2/6 crf 41
+2026-10-17 10:50:55 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 5.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.81x
+2026-10-17 10:50:55 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=2m 0.0s, output=11.0 MB, write_rate=307.1 KB/s, input_duration/elapsed=2.31x
+2026-10-17 10:50:55 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: [2026-10-17T10:50:55Z INFO  ab_av1::command::encode] 62%, 128 fps, eta 20 seconds
+2026-10-17 10:50:56 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:50:56Z INFO  ab_av1::vmaf] vmaf input_00004.sample157+480f.av1_nvenc.crf41.p4.mp4 vs reference input_00004.sample157+480f.mkv
+2026-10-17 10:51:00 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:00Z INFO  ab_av1::command::sample_encode] sample 2/6 crf 4110.378176 VMAF 89.32 (%)
+2026-10-17 10:51:00 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:00Z INFO  ab_av1::command::sample_encode] encoding sample 3/6 crf 41
+2026-10-17 10:51:00 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 10.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.63x
+2026-10-17 10:51:00 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=2m 5.0s, output=12.8 MB, write_rate=358.3 KB/s, input_duration/elapsed=2.22x
+2026-10-17 10:51:05 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:05Z INFO  ab_av1::vmaf] vmaf input_00004.sample246+480f.av1_nvenc.crf41.p4.mp4 vs reference input_00004.sample246+480f.mkv
+2026-10-17 10:51:05 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 15.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.46x
+2026-10-17 10:51:05 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=2m 10.0s, output=14.0 MB, write_rate=255.9 KB/s, input_duration/elapsed=2.13x
+2026-10-17 10:51:08 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:08Z INFO  ab_av1::command::sample_encode] sample 3/6 crf 4111.185684 VMAF 89.70 (%)
+2026-10-17 10:51:08 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:08Z INFO  ab_av1::command::sample_encode] encoding sample 4/6 crf 41
+2026-10-17 10:51:10 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 20.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.30x
+2026-10-17 10:51:10 | INFO    | [loc-neg-benchmark-chunk-00006] Compression status: elapsed=2m 15.0s, output=15.3 MB, write_rate=255.9 KB/s, input_duration/elapsed=2.05x
+2026-10-17 10:51:13 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:13Z INFO  ab_av1::vmaf] vmaf input_00004.sample335+480f.av1_nvenc.crf41.p4.mp4 vs reference input_00004.sample335+480f.mkv
+2026-10-17 10:51:15 | INFO    | [loc-neg-benchmark-chunk-00006] ab-av1 stderr: Encoded 16.25 MiB (11%)
+2026-10-17 10:51:15 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 25.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.15x
+2026-10-17 10:51:16 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:16Z INFO  ab_av1::command::sample_encode] sample 4/6 crf 419.566759 VMAF 89.62 (%)
+2026-10-17 10:51:16 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:16Z INFO  ab_av1::command::sample_encode] encoding sample 5/6 crf 41
+2026-10-17 10:51:20 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 30.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=4.01x
+2026-10-17 10:51:21 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:21Z INFO  ab_av1::vmaf] vmaf input_00004.sample424+480f.av1_nvenc.crf41.p4.mp4 vs reference input_00004.sample424+480f.mkv
+2026-10-17 10:51:24 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:24Z INFO  ab_av1::command::sample_encode] sample 5/6 crf 4113.210841 VMAF 89.31 (%)
+2026-10-17 10:51:24 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:24Z INFO  ab_av1::command::sample_encode] encoding sample 6/6 crf 41
+2026-10-17 10:51:25 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 35.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.88x
+2026-10-17 10:51:28 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:28Z INFO  ab_av1::vmaf] vmaf input_00004.sample512+480f.av1_nvenc.crf41.p4.mp4 vs reference input_00004.sample512+480f.mkv
+2026-10-17 10:51:30 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 40.0s, output=0.0 B, write_rate=0.0 B/s, input_duration/elapsed=3.76x
+2026-10-17 10:51:31 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:31Z INFO  ab_av1::command::sample_encode] sample 6/6 crf 4110.196027 VMAF 89.18 (%)
+2026-10-17 10:51:31 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:31Z INFO  ab_av1::command::sample_encode] crf 41 VMAF 89.37 predicted video stream size 39.25 MiB (11%) taking 2 minutes
+2026-10-17 10:51:31 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:31Z INFO  ab_av1::command::encode] encoding encoded_00004.mp4
+2026-10-17 10:51:35 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 45.1s, output=768.0 KB, write_rate=153.6 KB/s, input_duration/elapsed=3.65x
+2026-10-17 10:51:40 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 50.1s, output=3.0 MB, write_rate=460.7 KB/s, input_duration/elapsed=3.54x
+2026-10-17 10:51:45 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=2m 55.1s, output=5.3 MB, write_rate=460.7 KB/s, input_duration/elapsed=3.44x
+2026-10-17 10:51:48 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:51:48Z INFO  ab_av1::command::encode] 15%, 135 fps, eta 2 minutes
+2026-10-17 10:51:50 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 0.1s, output=7.3 MB, write_rate=409.4 KB/s, input_duration/elapsed=3.34x
+2026-10-17 10:51:55 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 5.1s, output=9.0 MB, write_rate=358.3 KB/s, input_duration/elapsed=3.25x
+2026-10-17 10:52:00 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 10.1s, output=11.5 MB, write_rate=511.7 KB/s, input_duration/elapsed=3.17x
+2026-10-17 10:52:04 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:52:04Z INFO  ab_av1::command::encode] 30%, 137 fps, eta 74 seconds
+2026-10-17 10:52:05 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 15.1s, output=13.5 MB, write_rate=409.5 KB/s, input_duration/elapsed=3.08x
+2026-10-17 10:52:10 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 20.1s, output=15.8 MB, write_rate=460.7 KB/s, input_duration/elapsed=3.01x
+2026-10-17 10:52:15 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 25.1s, output=18.5 MB, write_rate=563.1 KB/s, input_duration/elapsed=2.93x
+2026-10-17 10:52:20 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 30.1s, output=20.5 MB, write_rate=409.5 KB/s, input_duration/elapsed=2.86x
+2026-10-17 10:52:25 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 35.1s, output=22.5 MB, write_rate=409.5 KB/s, input_duration/elapsed=2.80x
+2026-10-17 10:52:30 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 40.1s, output=24.3 MB, write_rate=358.4 KB/s, input_duration/elapsed=2.73x
+2026-10-17 10:52:35 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 45.1s, output=26.3 MB, write_rate=409.5 KB/s, input_duration/elapsed=2.67x
+2026-10-17 10:52:36 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: [2026-10-17T10:52:36Z INFO  ab_av1::command::encode] 61%, 138 fps, eta 41 seconds
+2026-10-17 10:52:40 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 50.1s, output=28.8 MB, write_rate=511.9 KB/s, input_duration/elapsed=2.62x
+2026-10-17 10:52:45 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=3m 55.1s, output=31.8 MB, write_rate=614.2 KB/s, input_duration/elapsed=2.56x
+2026-10-17 10:52:50 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=4m 0.1s, output=33.8 MB, write_rate=409.5 KB/s, input_duration/elapsed=2.51x
+2026-10-17 10:52:55 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=4m 5.1s, output=36.3 MB, write_rate=511.9 KB/s, input_duration/elapsed=2.45x
+2026-10-17 10:53:00 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=4m 10.1s, output=38.8 MB, write_rate=511.9 KB/s, input_duration/elapsed=2.41x
+2026-10-17 10:53:05 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=4m 15.1s, output=41.0 MB, write_rate=460.7 KB/s, input_duration/elapsed=2.36x
+2026-10-17 10:53:10 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=4m 20.1s, output=43.5 MB, write_rate=511.8 KB/s, input_duration/elapsed=2.31x
+2026-10-17 10:53:15 | INFO    | [loc-neg-benchmark-chunk-00005] Compression status: elapsed=4m 25.1s, output=46.1 MB, write_rate=535.8 KB/s, input_duration/elapsed=2.27x
+2026-10-17 10:53:16 | INFO    | [loc-neg-benchmark-chunk-00005] ab-av1 stderr: Encoded 46.12 MiB (12%)
+2026-10-17 10:53:16 | INFO    | [loc-neg-benchmark] merge chunks: ffmpeg -hide_banner -y -f concat -safe 0 -i /bench/loc-neg-benchmark_chunks/concat.txt -c copy -movflags +faststart /bench/input_compressed.mp4
+2026-10-17 10:53:19 | INFO    | [loc-neg-benchmark] Compression timing summary: total=10m 42.3s, download=unknown, encode=33m 13.1s, verify=0.0s, upload=unknown, input_duration=54m 39.4s, input_size=1.9 GB, output_size=228.8 MB, size_ratio=0.115, effective_speed=1.65x, attempts=6, requested_target_vmaf=89.00, effective_min_vmaf_target=89.00, actual_vmaf=not_measured, quality_retries=0
+2026-10-17 10:53:19 | INFO    | [loc-neg-benchmark] Compression complete (local): /bench/input_compressed.mp4
+2026-10-17 10:53:19 | INFO    | [loc-neg-final] Full VMAF verification command: /app/ab-av1 vmaf --reference /bench/input.mp4 --distorted /bench/input_compressed.mp4 --vmaf model=version=vmaf_v0.6.1neg --vmaf pool=harmonic_mean --vmaf n_subsample=1 --vmaf n_threads=0 --vmaf-fps 0 --vmaf-scale none --vmaf-cuda
+{
+  "revision": "0e2d968aebdeac469416df51a4a2fcc193e3e576",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition, 610.57.04, 97887 MiB",
+  "codec": "AV1",
+  "mode": "CRF",
+  "model": "version=vmaf_v0.6.1neg",
+  "pool": "harmonic_mean",
+  "target_vmaf_neg": 89.0,
+  "chunk_target_seconds": 600,
+  "chunk_parallelism": 4,
+  "input_duration_seconds": 3279.416667,
+  "input_bytes": 2083898324,
+  "output_bytes": 239871925,
+  "output_to_input_size_ratio": 0.11510730741391008,
+  "compression_factor": 8.687545755927877,
+  "size_reduction_percent": 88.489269258609,
+  "processing_wall_seconds": 642.3335167490001,
+  "processing_realtime_multiple": 5.105473374015875,
+  "final_verification_seconds": 196.527006518,
+  "processing_plus_verification_seconds": 838.8605232670001,
+  "measured_full_video_vmaf_neg": 89.52667,
+  "quality_pass": true,
+  "verification_error": null,
+  "output_volume_path": "/input_compressed.mp4",
+  "input_probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "mime_codec_string": "avc1.640028",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1080,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "16:9",
+        "pix_fmt": "yuv420p",
+        "level": 40,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "time_base": "1/12288",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 40297472,
+        "duration": "3279.416667",
+        "bit_rate": "4950163",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "78706",
+        "extradata_size": 43,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "mime_codec_string": "mp4a.40.2",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 157409280,
+        "duration": "3279.360000",
+        "bit_rate": "127881",
+        "nb_frames": "153721",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/bench/input.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "3279.416667",
+      "size": "2083898324",
+      "bit_rate": "5083582",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf57.72.100"
+      }
+    }
+  },
+  "compression_config": {
+    "backend": "ab-av1",
+    "ab_av1_bin": "/app/ab-av1",
+    "encoders": {
+      "AV1": "av1_nvenc",
+      "H264": "h264_nvenc",
+      "H.264": "h264_nvenc",
+      "HEVC": "hevc_nvenc",
+      "H265": "hevc_nvenc",
+      "H.265": "hevc_nvenc",
+      "VP9": "libvpx-vp9"
+    },
+    "default_target_vmaf": 93.0,
+    "vmaf_fallback": {
+      "enabled": false,
+      "floor_delta": 5.0,
+      "step": 2.0,
+      "max_attempts": 5
+    },
+    "sample_every": "2m",
+    "short_sample_every": "5s",
+    "short_sample_max_duration_seconds": 120.0,
+    "vmaf_model": "version=vmaf_v0.6.1neg",
+    "vmaf_pool": "harmonic_mean",
+    "vmaf_n_subsample": "1",
+    "vmaf_n_threads": "0",
+    "vmaf_fps": "0",
+    "vmaf_scale": "none",
+    "vmaf_cuda": true,
+    "nvenc": {
+      "min_crf": "1",
+      "max_crf": "51",
+      "crf_increment": 1.0,
+      "targeted_min_crf": true,
+      "target_min_crfs": {
+        "85": 28.0,
+        "89": 22.0,
+        "93": 16.0
+      },
+      "bframe_args": [
+        "bf=5",
+        "b_ref_mode=middle"
+      ],
+      "temporal_aq": true,
+      "temporal_filter_level": 0,
+      "thorough": false,
+      "full_search": false,
+      "full_vmaf_verify": true,
+      "verify_retry": true,
+      "direct_cq": {
+        "enabled_for_av1": true,
+        "enabled_for_hevc": true,
+        "effective_for_av1": true,
+        "effective_for_hevc": true,
+        "av1_initial_crfs": {
+          "85": 47.75,
+          "89": 42.5,
+          "93": 36.75
+        },
+        "hevc_initial_crfs": {
+          "85": 46.25,
+          "89": 35.5,
+          "93": 30.0
+        },
+        "vmaf_per_crf": 1.5,
+        "hevc_vmaf_per_crf": 0.18,
+        "retry_min_overshoot": 1.0,
+        "max_crf_adjustment": 4.0,
+        "rate_cap_saturation_ratio": 0.95
+      },
+      "verify_timeout_seconds": 3600.0
+    },
+    "av1_nvenc": {
+      "encoder_args": [
+        "rc=vbr",
+        "b:v=0",
+        "tune=uhq",
+        "multipass=fullres",
+        "rc-lookahead=24",
+        "lookahead_level=3",
+        "g=900",
+        "tile-columns=1",
+        "tile-rows=1",
+        "qp_cb_offset=2",
+        "qp_cr_offset=2"
+      ]
+    },
+    "hevc_nvenc": {
+      "default_preset": "p4",
+      "min_crf": "1",
+      "max_crf": "51",
+      "thorough": false,
+      "full_search": false,
+      "encoder_args": [
+        "rc=vbr",
+        "b:v=0",
+        "tune=hq",
+        "multipass=qres",
+        "rc-lookahead=24",
+        "lookahead_level=3",
+        "g=900",
+        "qp_cb_offset=2",
+        "qp_cr_offset=2"
+      ]
+    },
+    "vbr": {
+      "supported_encoders": "*_nvenc",
+      "max_rate_ratio": 1.1,
+      "validation_tolerance": 0.1
+    },
+    "chunking_enabled": true,
+    "chunk_min_duration_seconds": 1200,
+    "chunk_target_seconds": 600,
+    "chunk_parallelism": 4
+  },
+  "remote_call_wall_seconds": 844.4197020418942
+}
+Stopping app - local entrypoint completed.
+✓ App completed. View run at https://modal.com/apps/tripathiarpan20/main/ap-awoN60K9876JrJS1CAC8Ro

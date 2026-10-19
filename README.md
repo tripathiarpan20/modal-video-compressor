@@ -4,7 +4,7 @@
 
 **2.08 GB → 240 MB. One RTX PRO 6000 Blackwell. Full-video VMAF NEG: 89.53.**
 
-Serverless AV1 compression that puts four parallel chunk jobs on one GPU—and joins the results without another encode. Run it from your laptop; Modal handles the GPU.
+Serverless AV1 compression with **our custom ab-av1 CUDA VMAF integration**, four parallel chunk jobs on one GPU, and joins that need no second encode. Run it from your laptop; Modal handles the GPU.
 
 | The result | Measured on the public benchmark video |
 |---|---:|
@@ -19,6 +19,7 @@ Measured on one 54m 39s, 1080p24 video on **October 17, 2026**. Compression time
 
 ### What makes it fast?
 
+- **GPU encoding deserves GPU quality scoring.** Our [custom ab-av1 patch](image/ab-av1-vmaf-cuda.patch) adds `--vmaf-cuda`, routing VMAF NEG analysis through FFmpeg's `libvmaf_cuda` for CRF search and final verification. The image builds CUDA-enabled libvmaf and FFmpeg together.
 - **One GPU, four concurrent jobs.** RTX PRO 6000 Blackwell combines four NVENC encoders, four NVDEC decoders and CUDA compute for encoding and quality scoring.
 - **Cut at keyframes. Skip the second encode.** Split near existing source keyframes, compress chunks in parallel, then concatenate with stream copy. No full-video re-encode just to join the pieces.
 - **Search samples. Verify the whole video.** Sampled CRF search was **2.61× faster** than our full-chunk search for processing this video; a separate full-video VMAF NEG check verifies the final result.
@@ -50,6 +51,14 @@ This does **not** establish 10× faster or cheaper than AWS MediaConvert. No AWS
 Evidence: [full report](benchmarks/2026-10-17/report.json), [logs](benchmarks/2026-10-17/run-vmaf89-sampled.log), [baseline](benchmarks/2026-10-17/baseline-full-search/report.json), [provenance](benchmarks/2026-10-17/provenance.json), and [benchmark details](benchmarks/2026-10-17/README.md).
 
 ## Features and design
+
+### Custom ab-av1 + CUDA VMAF integration
+
+**NVENC handles compression. CUDA handles VMAF analysis.** Our [ab-av1 patch](image/ab-av1-vmaf-cuda.patch) connects the pinned ab-av1 version to FFmpeg's existing `libvmaf_cuda` filter, exposing `--vmaf-cuda` and `AB_AV1_VMAF_CUDA`. The default profile uses this path for both sampled CRF search and the final full-video VMAF NEG check.
+
+The patch builds the CUDA filter graph: it normalizes timestamps, preserves reference preprocessing on the CPU, uploads reference and distorted frames with `hwupload_cuda`, and uses `scale_cuda` to prepare them for scoring. It also sets `n_threads=0` for this path and includes the CUDA flag in ab-av1's VMAF configuration hash. Reference preprocessing and frame uploads remain part of the pipeline; this is not a claim of end-to-end zero-copy processing.
+
+The [Dockerfile](image/Dockerfile) applies the patch, builds libvmaf with `ENABLE_NVCC=true`, builds FFmpeg with CUDA/libvmaf support, and checks that `libvmaf_cuda` is available. A separate [libvmaf pooling patch](image/vmaf-harmonic-mean.patch) implements the benchmark's unshifted harmonic mean over positive frame scores. That patch changes aggregation, not CUDA compatibility; use the same pooling convention when comparing quality scores.
 
 ### RTX PRO 6000 Blackwell for AV1 encoding and CUDA scoring
 
